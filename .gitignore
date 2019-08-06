@@ -1,0 +1,15 @@
+# JetBrains project files
+.idea
+
+# NPM
+node_modules
+
+# NativeScript application
+hooks
+platforms
+
+package-lock.json
+
+# Backups
+.migration_backup
+.update_backup
