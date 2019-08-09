@@ -1,5 +1,5 @@
 <template>
-  <page-template page-title="PPPP">
+  <page-template>
     <StackLayout orientation="Vertical">
       <Button text="Start Insect ID" @tap="$goto('insectId')"></Button>
       <Button text="Explore Insects" @tap="$goto('exploreInsects')"></Button>

@@ -1,7 +1,7 @@
 
 
 <template>
-  <page-template>
+  <page-template page-title="Insect ID">
     <StackLayout orientation="Vertical">
       <Button text="Back to Master" @tap="$navigateBack" />
     </StackLayout>
