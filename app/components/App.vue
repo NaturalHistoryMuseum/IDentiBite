@@ -1,10 +1,11 @@
 <template>
-  <page-template>
-    <StackLayout orientation="Vertical">
-      <Button text="Start Insect ID" @tap="$goto('insectId')"></Button>
-      <Button text="Explore Insects" @tap="$goto('exploreInsects')"></Button>
-    </StackLayout>
-  </page-template>
+  <RadSideDrawer>
+    <GridLayout tkDrawerContent>
+      <Label text="Side Menu"></Label>
+    </GridLayout>
+
+    <page-router-outlet tkMainContent></page-router-outlet>
+  </RadSideDrawer>
 </template>
 
 
