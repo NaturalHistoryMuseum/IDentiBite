@@ -1,21 +1,20 @@
 
 
 <template>
-  <page-template page-title="Insect ID">
+  <Page>
+    <Header page-title="Insect ID" />
     <StackLayout orientation="Vertical">
       <Button text="Back to Master" @tap="$navigateBack" />
     </StackLayout>
-  </page-template>
+  </Page>
 </template>
 
 
 <script >
+import Header from "../components/Header";
+
 export default {
-  data() {
-    return {
-      msg: "Hello World!"
-    };
-  }
+  components: { Header }
 };
 </script>
 

@@ -1,34 +1,30 @@
 <template>
-  <RadSideDrawer>
-    <GridLayout tkDrawerContent>
-      <Label text="Side Menu"></Label>
-    </GridLayout>
-
-    <page-router-outlet tkMainContent></page-router-outlet>
-  </RadSideDrawer>
+  <Page actionBarHidden="true">
+    <RadSideDrawer ref="drawer">
+      <StackLayout ~drawerContent backgroundColor="#eee">
+        <Label class="h1" text="IDentiBite"></Label>
+        <Label text="Home" @tap="$goto('index')"></Label>
+        <Label text="Start Insect ID" @tap="$goto('insectId')"></Label>
+        <Label text="Explore Insects" @tap="$goto('exploreInsects')"></Label>
+        <StackLayout class="hr-light m-10"></StackLayout>
+        <Label text="About"></Label>
+      </StackLayout>
+      <Frame ~mainContent id="mainContent">
+        <IndexPage />
+      </Frame>
+    </RadSideDrawer>
+  </Page>
 </template>
 
-
 <script >
+import Vue from "nativescript-vue";
+
+import IndexPage from "~/pages/Index";
+
 export default {
-  data() {
-    return {
-      msg: "Hello World!"
-    };
-  },
-  methods: {
-    onBackTap() {
-      frameModule.topmost().goBack();
-    },
-    onOpenDrawerTap() {
-      this.$refs.drawer.nativeView.showDrawer();
-    },
-    onCloseDrawerTap() {
-      this.$refs.drawer.nativeView.closeDrawer();
-    },
-    onToggleDrawerTap() {
-      this.$refs.drawer.nativeView.toggleDrawerState();
-    }
+  components: { IndexPage: IndexPage },
+  mounted() {
+    Vue.prototype.drawer = this.$refs.drawer.nativeView;
   }
 };
 </script>

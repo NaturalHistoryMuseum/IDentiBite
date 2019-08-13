@@ -1,12 +1,14 @@
-import ExploreInsects from './components/ExploreInsects'
-import InsectID from './components/InsectID'
-// import Treatment from './components/Treatment'
-// import About from './components/About'
+import ExploreInsectsPage from './pages/ExploreInsects'
+import InsectIDPage from './pages/InsectID'
+import IndexPage from './pages/Index'
+// import Treatment from './pages/Treatment'
+// import About from './pages/About'
 
 
 const router = {
-    exploreInsects: ExploreInsects,
-    insectId: InsectID,
+    exploreInsects: ExploreInsectsPage,
+    insectId: InsectIDPage,
+    index: IndexPage,
     // treatment: Treatment,
     // about: About
 }

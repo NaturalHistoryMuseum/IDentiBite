@@ -4,18 +4,46 @@ import store from './store';
 
 import VueDevtools from 'nativescript-vue-devtools'
 
+// const data = require('./assets/data.json');
+
+// var fs = require('file-system');
+// var documents = fs.knownFolders.currentApp();
+// var jsonFile = documents.getFile('./assets/data.json');
+
+// jsonFile.readText().then(function (content) {
+//     data = JSON.parse(content)
+//     // x = JSON.parse(content)
+//     // console.log(x)
+// });
+
 // Routing
 import router from './router'
 Vue.prototype.$router = router
 Vue.prototype.$goto = function (to) {
+    this.$closeDrawer();
     this.$navigateTo(
-        this.$router[to], {}
+        this.$router[to], { frame: "mainContent" }
     )
 }
 
+Vue.prototype.$showDrawer = function () {
+    Vue.prototype.drawer.showDrawer();
+}
+
+Vue.prototype.$closeDrawer = function () {
+    Vue.prototype.drawer.closeDrawer();
+}
+
+// onBackTap() {
+//     frameModule.topmost().goBack();
+// },
+// onToggleDrawerTap() {
+//     Vue.prototype.drawer.toggleDrawerState();
+// }
+
 // Register the page template
-import PageTemplate from './templates/PageTemplate.vue'
-Vue.component('page-template', PageTemplate);
+// import PageTemplate from './templates/PageTemplate.vue'
+// Vue.component('page-template', PageTemplate);
 
 if (TNS_ENV !== 'production') {
     Vue.use(VueDevtools)
@@ -31,16 +59,13 @@ TNSFontIcon.debug = true;
 TNSFontIcon.paths = {
     'fa': './assets/font-awesome.css'
 };
-// TNSFontIcon.loadCss();
-
-// Or verbose variant:
-TNSFontIcon.loadCss().then(() => {
-    console.log('FontAwesome font collection loaded successfully.');
-}).catch((e) => {
-    console.log('Error loading FontAwesome font collection!', e.getMessage());
-});
+TNSFontIcon.loadCss();
 
 Vue.filter('fonticon', fonticon);
+
+// import NSVueGlobalDrawer from 'nativescript-vue-global-drawer'
+
+// Vue.use(NSVueGlobalDrawer)
 
 new Vue({
     store,
