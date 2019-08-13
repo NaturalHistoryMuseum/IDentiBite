@@ -13,3 +13,6 @@ package-lock.json
 # Backups
 .migration_backup
 .update_backup
+
+# OSX
+.DS_Store
