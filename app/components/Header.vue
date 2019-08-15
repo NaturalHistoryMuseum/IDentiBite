@@ -1,8 +1,8 @@
 <template>
   <ActionBar>
-    <GridLayout width="100%" columns="auto, *">
-      <Label class="fa" @tap="$showDrawer()" :text="'fa-bars' | fonticon" />
-      <Label class="title" :text="pageTitle" col="1" />
+    <GridLayout width="100%" columns="*, 80">
+      <Label col="0" class="title" :text="pageTitle" />
+      <Label col="1" class="fa" @tap="$showDrawer()" :text="'fa-bars' | fonticon" />
     </GridLayout>
   </ActionBar>
 </template>

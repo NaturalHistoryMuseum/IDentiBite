@@ -9,7 +9,13 @@
 // Global SCSS styling
 // @see https://docs.nativescript.org/ui/styling
 
+// $red: #EE0410;
+
 .fa {
     font-family: 'FontAwesome', 'fontawesome-webfont';
     font-size: 40;
+}
+
+.right {
+  horizontal-align: right;
 }

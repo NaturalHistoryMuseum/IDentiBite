@@ -1,15 +1,17 @@
 import ExploreInsectsPage from './pages/ExploreInsects'
 import InsectIDPage from './pages/InsectID'
-import IndexPage from './pages/Index'
-// import Treatment from './pages/Treatment'
+import HomePage from './pages/Home'
+import FactSheet from './pages/FactSheet'
+import TreatmentPage from './pages/Treatment'
 // import About from './pages/About'
 
 
 const router = {
     exploreInsects: ExploreInsectsPage,
     insectId: InsectIDPage,
-    index: IndexPage,
-    // treatment: Treatment,
+    home: HomePage,
+    factSheet: FactSheet,
+    treatment: TreatmentPage,
     // about: About
 }
 

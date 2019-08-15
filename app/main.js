@@ -2,27 +2,33 @@ import Vue from 'nativescript-vue'
 import App from './components/App'
 import store from './store';
 
+import './filters.js';
+
+// FIXME: Add to production flag??
 import VueDevtools from 'nativescript-vue-devtools'
+Vue.use(VueDevtools)
 
-// const data = require('./assets/data.json');
+import RadListView from 'nativescript-ui-listview/vue';
+Vue.use(RadListView);
 
-// var fs = require('file-system');
-// var documents = fs.knownFolders.currentApp();
-// var jsonFile = documents.getFile('./assets/data.json');
-
-// jsonFile.readText().then(function (content) {
-//     data = JSON.parse(content)
-//     // x = JSON.parse(content)
-//     // console.log(x)
-// });
+Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
 
 // Routing
 import router from './router'
+
 Vue.prototype.$router = router
-Vue.prototype.$goto = function (to) {
+Vue.prototype.$goto = function (to, options = {}) {
     this.$closeDrawer();
+    // Merge frame option into any option parameters
+    Object.assign(options, { frame: "mainContent" });
+
+    if (to == 'home') {
+        options['clearHistory'] = true
+    }
+
     this.$navigateTo(
-        this.$router[to], { frame: "mainContent" }
+        this.$router[to],
+        options
     )
 }
 
@@ -41,9 +47,9 @@ Vue.prototype.$closeDrawer = function () {
 //     Vue.prototype.drawer.toggleDrawerState();
 // }
 
-// Register the page template
-// import PageTemplate from './templates/PageTemplate.vue'
-// Vue.component('page-template', PageTemplate);
+// Register the header component globally
+import Header from "./components/Header";
+Vue.component('Header', Header);
 
 if (TNS_ENV !== 'production') {
     Vue.use(VueDevtools)
@@ -63,11 +69,7 @@ TNSFontIcon.loadCss();
 
 Vue.filter('fonticon', fonticon);
 
-// import NSVueGlobalDrawer from 'nativescript-vue-global-drawer'
-
-// Vue.use(NSVueGlobalDrawer)
-
 new Vue({
     store,
-    render: h => h('frame', [h(App)])
+    render: h => h('frame', [h(App)]),
 }).$start()
