@@ -3,7 +3,7 @@
 <template>
   <Page>
     <Header page-title="Insect ID" />
-    <GridLayout rows="*, 130">
+    <GridLayout rows="*, 120">
       <StackLayout row="0">
         <SegmentedBar v-model="selectedCharacterGroup">
           <SegmentedBarItem
@@ -13,50 +13,65 @@
           />
         </SegmentedBar>
         <Label :text="help"></Label>
-        <Switch col="1" checkedChange="dropDownSelectedIndexChanged" />
-        <ListView for="character in characterList">
+        <RadListView for="character in characterListByGroup">
           <v-template>
-            <GridLayout columns="*, 50">
-              <Label col="0" :text="character.label" />
-              <DropDown
+            <GridLayout columns="*, *">
+              <Label col="0" :text="character.label" textWrap="true" />
+              <PickerField
                 col="1"
-                :items="getCharacterStateValuesList(character)"
-                accessoryViewVisible="false"
-                backgroundColor="red"
+                hint="<Select>"
                 :id="character.id"
                 :ref="character.id"
-                :selectedIndex="getCharacterStatesSelectedIndex()"
-                @selectedIndexChanged="dropDownSelectedIndexChanged"
-              />
+                padding="10"
+                for="item in character.states"
+                textField="label"
+                valueField="id"
+                :pickerTitle="character.label"
+                :selectedValue="getCharacterStateSelectedValue(character)"
+                @selectedValueChange="dropDownSelectedIndexChanged"
+              >
+                <v-template>
+                  <StackLayout>
+                    <Label :text="item.label" class="item-template-label red-label" margin="20"></Label>
+                  </StackLayout>
+                </v-template>
+              </PickerField>
             </GridLayout>
           </v-template>
-          <v-template if="character.states.length == 2">
+          <v-template if="character.is_yes_no">
             <StackLayout>
-              <GridLayout columns="*, 50">
+              <GridLayout columns="*, *">
                 <Label col="0" :text="character.label" textWrap="true" />
-                <Switch col="1" v-model="characters[character.id]" />
+                <Switch
+                  col="1"
+                  :id="character.id"
+                  :ref="character.id"
+                  v-model="characterStates[character.id]"
+                />
               </GridLayout>
             </StackLayout>
           </v-template>
-        </ListView>
+        </RadListView>
       </StackLayout>
 
-      <RadListView
-        row="1"
-        ref="listView"
-        orientation="horizontal"
-        for="insect in insectList"
-        @itemTap="onInsectTap"
-      >
-        <v-template>
-          <FlexboxLayout class="insect">
-            <StackLayout class="item" orientation="vertical">
-              <Image height="100" :src="insect.images[0] | imageAssetPath" />
-              <Label :text="insect.common_name" class="nameLabel"></Label>
-            </StackLayout>
-          </FlexboxLayout>
-        </v-template>
-      </RadListView>
+      <StackLayout row="1">
+        <Label>Current possibilities {{ currentPosibilitiesCount }}</Label>
+        <RadListView
+          ref="listView"
+          orientation="horizontal"
+          for="insect in insectList"
+          @itemTap="onInsectTap"
+        >
+          <v-template>
+            <FlexboxLayout class="insect">
+              <StackLayout class="item" orientation="vertical">
+                <Image height="100" :src="insect.images[0] | imageAssetPath" />
+                <Label :text="insect.common_name" class="nameLabel"></Label>
+              </StackLayout>
+            </FlexboxLayout>
+          </v-template>
+        </RadListView>
+      </StackLayout>
     </GridLayout>
   </Page>
 </template>
@@ -87,46 +102,45 @@ export default {
         {
           key: "what",
           title: "What?",
-          help: "What did it look like?"
+          help: "What did the insect look like?"
         }
       ],
       selectedCharacterGroup: 0,
-      characters: {}
+      characterStates: {}
     };
   },
   computed: {
     insectList() {
-      return this.$store.state.insects;
+      return this.$store.state.insects.filter(this.filterSpeciesList);
     },
     selectedGroupKey() {
       return this.characterGroups[this.selectedCharacterGroup].key;
     },
-    characterList() {
+    characterListByGroup() {
       return this.$store.state.characters[this.selectedGroupKey];
     },
     help() {
       return this.characterGroups[this.selectedCharacterGroup].help;
+    },
+    currentPosibilitiesCount() {
+      return this.insectList.length;
+    },
+    // Filter list of character states - as it's used in the v-model
+    // characterStates includes false and undefined values
+    selectedCharacterStates() {
+      let selectedCharacterStates = {};
+      for (const [characterID, characterState] of Object.entries(
+        this.characterStates
+      )) {
+        if (typeof characterState !== "undefined" && characterState) {
+          selectedCharacterStates[characterID] = characterState;
+        }
+      }
+
+      return selectedCharacterStates;
     }
   },
   methods: {
-    getCharacterStateValuesList(character) {
-      // FIXME: Fix in source data
-      let options = character.states.map(function(state) {
-        return { value: state.id, display: state.label };
-      });
-      return new ValueList(options);
-    },
-    getCharacterStatesSelectedIndex(args) {
-      // AARRGGGH we do need it here
-      console.log(args);
-      return 0;
-      //   if (this.selectedIndex.indexOf(characterId)) {
-      //     return this.selectedIndex[characterId];
-      //   }
-    },
-    onSelectedIndexChange(insect) {
-      //   console.log("HEYEYEEY");
-    },
     onInsectTap(args) {
       this.$goto("factSheet", {
         props: {
@@ -134,10 +148,31 @@ export default {
         }
       });
     },
-    dropDownSelectedIndexChanged(args) {
-      this.characters[args.object.id] = args.object.items.getValue(
-        args.newIndex
+    getCharacterStateSelectedValue(character) {
+      return this.characterStates[character.id];
+    },
+    dropDownSelectedIndexChanged(event) {
+      // Reactive update
+      this.$set(
+        this.characterStates,
+        event.object.id,
+        event.object.selectedValue
       );
+    },
+    filterSpeciesList(species) {
+      for (const [characterID, characterState] of Object.entries(
+        this.selectedCharacterStates
+      )) {
+        console.log(species.character_states[characterID]);
+        // species;
+        // console.log(characterID, characterState);
+      }
+      //   for (var characterID in this.selectedCharacterStates) {
+      //     let characterState = this.characterStates[characterID];
+      //     console.log(characterID);
+      //     console.log(characterState);
+      //   }
+      return false;
     }
   }
 };

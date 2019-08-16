@@ -11,7 +11,10 @@ Vue.use(VueDevtools)
 import RadListView from 'nativescript-ui-listview/vue';
 Vue.use(RadListView);
 
-Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
+// Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
+
+import PickerField from "nativescript-picker/vue";
+Vue.use(PickerField);
 
 // Routing
 import router from './router'
