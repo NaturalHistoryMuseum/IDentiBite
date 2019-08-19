@@ -14,33 +14,30 @@
         </SegmentedBar>
         <Label :text="help"></Label>
         <Button text="Reset" @tap="onResetButtonTap" />
-        <RadListView for="character in characterListByGroup">
-          <v-template>
-            <GridLayout columns="*, *">
-              <Label col="0" :text="character.label" textWrap="true" />
-              <PickerField
-                col="1"
-                hint="<Select>"
-                :id="character.id"
-                :ref="character.id"
-                padding="10"
-                for="item in character.states"
-                textField="label"
-                valueField="id"
-                :pickerTitle="character.label"
-                :selectedValue="characterStates[character.id]"
-                @selectedValueChange="dropDownSelectedIndexChanged"
-                v-bind="$characterStates"
-              >
-                <v-template>
-                  <StackLayout>
-                    <Label :text="item.label" class="item-template-label red-label" margin="20"></Label>
-                  </StackLayout>
-                </v-template>
-              </PickerField>
-            </GridLayout>
-          </v-template>
-        </RadListView>
+        <RadDataForm
+          :source="person"
+          @propertyCommitted="dfPropertyCommitted"
+          @propertyCommit="dfPropertyCommitted"
+        >
+          <TKEntityProperty
+            v-tkDataFormProperty
+            name="type"
+            displayName="Type"
+            index="3"
+            valuesProvider="2D, 3D"
+          >
+            <TKPropertyEditor v-tkEntityPropertyEditor type="List"></TKPropertyEditor>
+          </TKEntityProperty>
+          <TKEntityProperty
+            v-tkDataFormProperty
+            name="type2"
+            displayName="Type"
+            index="3"
+            valuesProvider="2D, 3D"
+          >
+            <TKPropertyEditor v-tkEntityPropertyEditor type="List"></TKPropertyEditor>
+          </TKEntityProperty>
+        </RadDataForm>
       </StackLayout>
 
       <StackLayout row="1">
@@ -93,7 +90,21 @@ export default {
         }
       ],
       selectedCharacterGroup: 0,
-      characterStates: {}
+      characterStates: {
+        "86": null
+      },
+      person: {
+        type: null,
+        type2: null
+      }
+      //   characterStatesMetadata: {
+      //     propertyAnnotations: [
+      //       {
+      //         name: "86",
+      //         displayName: "Street Number2"
+      //       }
+      //     ]
+      //   }
     };
   },
   computed: {
@@ -111,6 +122,39 @@ export default {
     },
     currentPosibilitiesCount() {
       return this.insectList.length;
+    },
+    characterStatesComp() {
+      let states = {};
+      var x;
+      // FIXME: Use map
+      for (x in this.$store.state.characters) {
+        let char = this.$store.state.characters[x];
+        states[char.id] = null;
+      }
+      console.log(states);
+      console.log("XXXXXXXXXXXXXTXTXTXTXTXTXTXTXTXTXTXT");
+      return states;
+    },
+    characterStatesMetadata() {
+      let metadata = {
+        isReadOnly: false,
+        commitMode: "Immediate",
+        validationMode: "Immediate",
+        propertyAnnotations: []
+      };
+      for (let index in this.$store.state.characters) {
+        let character = this.$store.state.characters[index];
+        metadata.propertyAnnotations.push({
+          name: character["id"].toString(),
+          displayName: character["label"],
+          index: Number(index),
+          editor: "Picker",
+          valuesProvider: ["New York", "Washington", "Los Angeles"]
+        });
+      }
+      console.log("XXXXXXXXXXXXXTXTXTXTXTXTXTXTXTXTXTXT");
+      console.log(metadata);
+      return metadata;
     }
     // Filter list of character states - as it's used in the v-model
     // characterStates includes false and undefined values
@@ -126,6 +170,27 @@ export default {
 
     //   return selectedCharacterStates;
     // }
+  },
+  create() {
+    console.log("CREATED");
+    // this.characterStates = {
+    //   256: null
+    // };
+  },
+  mounted() {
+    // this.characterStates = this.$store.state.characters.map(function(
+    //   character
+    // ) {
+    //   return {
+    //     [character.id]: null
+    //   };
+    // });
+    console.log("MOUNTED XXXX XXXX XXXX XXX");
+
+    // this.characterStates = {
+    //   256: null
+    // };
+    // console.log(this.characterStates);
   },
   methods: {
     onInsectTap(args) {
@@ -147,26 +212,29 @@ export default {
       );
     },
     filterSpeciesList(species) {
-      for (const [characterID, characterState] of Object.entries(
-        this.characterStates
-      )) {
-        // If any character states do not match the species, return flase (hide species)
-        if (
-          species.character_states[characterID].indexOf(characterState) == -1
-        ) {
-          return false;
-        }
-      }
+      //   for (const [characterID, characterState] of Object.entries(
+      //     this.characterStates
+      //   )) {
+      //     // If any character states do not match the species, return flase (hide species)
+      //     if (
+      //       species.character_states[characterID].indexOf(characterState) == -1
+      //     ) {
+      //       return false;
+      //     }
+      //   }
       return true;
     },
     onResetButtonTap() {
-      for (var characterID in this.characterStates) {
-        console.log(characterID);
-        this.$delete(this.characterStates, characterID);
+      for (var x in this.person) {
+        this.person[x] = null;
       }
       //   console.log("RESET");
       // Object.assign({}, this.characterStates, {});
       //   this.characterStates = {};
+    },
+    dfPropertyCommitted() {
+      console.log("COMMIT");
+      console.log(this.person.name);
     }
   }
 };

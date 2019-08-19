@@ -16,6 +16,11 @@ Vue.use(RadListView);
 import PickerField from "nativescript-picker/vue";
 Vue.use(PickerField);
 
+// Data form
+import RadDataForm from 'nativescript-ui-dataform/vue';
+Vue.use(RadDataForm);
+
+
 // Routing
 import router from './router'
 
