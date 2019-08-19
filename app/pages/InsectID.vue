@@ -13,6 +13,7 @@
           />
         </SegmentedBar>
         <Label :text="help"></Label>
+        <Button text="Reset" @tap="onResetButtonTap" />
         <RadListView for="character in characterListByGroup">
           <v-template>
             <GridLayout columns="*, *">
@@ -27,8 +28,9 @@
                 textField="label"
                 valueField="id"
                 :pickerTitle="character.label"
-                :selectedValue="getCharacterStateSelectedValue(character)"
+                :selectedValue="characterStates[character.id]"
                 @selectedValueChange="dropDownSelectedIndexChanged"
+                v-bind="$characterStates"
               >
                 <v-template>
                   <StackLayout>
@@ -37,19 +39,6 @@
                 </v-template>
               </PickerField>
             </GridLayout>
-          </v-template>
-          <v-template if="character.is_yes_no">
-            <StackLayout>
-              <GridLayout columns="*, *">
-                <Label col="0" :text="character.label" textWrap="true" />
-                <Switch
-                  col="1"
-                  :id="character.id"
-                  :ref="character.id"
-                  v-model="characterStates[character.id]"
-                />
-              </GridLayout>
-            </StackLayout>
           </v-template>
         </RadListView>
       </StackLayout>
@@ -78,8 +67,6 @@
 
 
 <script>
-import { ValueList } from "nativescript-drop-down";
-
 export default {
   data: function() {
     return {
@@ -124,21 +111,21 @@ export default {
     },
     currentPosibilitiesCount() {
       return this.insectList.length;
-    },
+    }
     // Filter list of character states - as it's used in the v-model
     // characterStates includes false and undefined values
-    selectedCharacterStates() {
-      let selectedCharacterStates = {};
-      for (const [characterID, characterState] of Object.entries(
-        this.characterStates
-      )) {
-        if (typeof characterState !== "undefined" && characterState) {
-          selectedCharacterStates[characterID] = characterState;
-        }
-      }
+    // selectedCharacterStates() {
+    //   let selectedCharacterStates = {};
+    //   for (const [characterID, characterState] of Object.entries(
+    //     this.characterStates
+    //   )) {
+    //     if (typeof characterState !== "undefined" && characterState) {
+    //       selectedCharacterStates[characterID] = characterState;
+    //     }
+    //   }
 
-      return selectedCharacterStates;
-    }
+    //   return selectedCharacterStates;
+    // }
   },
   methods: {
     onInsectTap(args) {
@@ -148,9 +135,9 @@ export default {
         }
       });
     },
-    getCharacterStateSelectedValue(character) {
-      return this.characterStates[character.id];
-    },
+    // getCharacterStateSelectedValue(character) {
+    //   return this.characterStates[character.id];
+    // },
     dropDownSelectedIndexChanged(event) {
       // Reactive update
       this.$set(
@@ -161,18 +148,25 @@ export default {
     },
     filterSpeciesList(species) {
       for (const [characterID, characterState] of Object.entries(
-        this.selectedCharacterStates
+        this.characterStates
       )) {
-        console.log(species.character_states[characterID]);
-        // species;
-        // console.log(characterID, characterState);
+        // If any character states do not match the species, return flase (hide species)
+        if (
+          species.character_states[characterID].indexOf(characterState) == -1
+        ) {
+          return false;
+        }
       }
-      //   for (var characterID in this.selectedCharacterStates) {
-      //     let characterState = this.characterStates[characterID];
-      //     console.log(characterID);
-      //     console.log(characterState);
-      //   }
-      return false;
+      return true;
+    },
+    onResetButtonTap() {
+      for (var characterID in this.characterStates) {
+        console.log(characterID);
+        this.$delete(this.characterStates, characterID);
+      }
+      //   console.log("RESET");
+      // Object.assign({}, this.characterStates, {});
+      //   this.characterStates = {};
     }
   }
 };
