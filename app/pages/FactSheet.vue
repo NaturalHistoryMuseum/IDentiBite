@@ -23,7 +23,7 @@ export default {
       return this.$store.getters.getInsectByScientificName(this.name);
     },
     insectName() {
-      return `${this.insect.common_name} ${this.insect.group}`;
+      //   return `${this.insect.common_name} ${this.insect.group}`;
     }
   }
 };

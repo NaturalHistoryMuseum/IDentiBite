@@ -123,6 +123,11 @@ export default new Vuex.Store({
     getters: {
         getInsectByScientificName: (state) => (scientificName) => {
             return state.insects.find(todo => todo.scientific_name === scientificName)
+        },
+        getCharactersStateCount: (state) => {
+            return Object.fromEntries(
+                state.characters.map(char => [char.id, char.states.length])
+            )
         }
     }
 });

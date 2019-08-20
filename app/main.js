@@ -40,6 +40,13 @@ Vue.prototype.$goto = function (to, options = {}) {
     )
 }
 
+
+import { ModalStack, overrideModalViewMethod, VueWindowedModal } from "nativescript-windowed-modal"
+
+overrideModalViewMethod()
+Vue.registerElement("ModalStack", () => ModalStack)
+Vue.use(VueWindowedModal)
+
 Vue.prototype.$showDrawer = function () {
     Vue.prototype.drawer.showDrawer();
 }

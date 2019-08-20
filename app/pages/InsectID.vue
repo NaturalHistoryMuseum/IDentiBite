@@ -12,32 +12,26 @@
             v-bind:key="group"
           />
         </SegmentedBar>
-        <Label :text="help"></Label>
+        <Label :text="characterGroupHelp"></Label>
         <Button text="Reset" @tap="onResetButtonTap" />
-        <RadDataForm
-          :source="person"
-          @propertyCommitted="dfPropertyCommitted"
-          @propertyCommit="dfPropertyCommitted"
-        >
-          <TKEntityProperty
-            v-tkDataFormProperty
-            name="type"
-            displayName="Type"
-            index="3"
-            valuesProvider="2D, 3D"
-          >
-            <TKPropertyEditor v-tkEntityPropertyEditor type="List"></TKPropertyEditor>
-          </TKEntityProperty>
-          <TKEntityProperty
-            v-tkDataFormProperty
-            name="type2"
-            displayName="Type"
-            index="3"
-            valuesProvider="2D, 3D"
-          >
-            <TKPropertyEditor v-tkEntityPropertyEditor type="List"></TKPropertyEditor>
-          </TKEntityProperty>
-        </RadDataForm>
+        <ListView for="character in characterListByGroup" ref="characterList">
+          <v-template>
+            <GridLayout columns="*, *" backgroundColor="pink">
+              <Label
+                col="0"
+                :text="character.label"
+                textWrap="true"
+                @tap="showModalForm(character)"
+                :backgroundColor="isReleventCharacter(character) ? 'red' : 'yellow'"
+              />
+              <Label
+                col="1"
+                :text="getCharacterSelectedStateValue(character)"
+                @tap="showModalForm(character)"
+              />
+            </GridLayout>
+          </v-template>
+        </ListView>
       </StackLayout>
 
       <StackLayout row="1">
@@ -64,6 +58,8 @@
 
 
 <script>
+import ModalForm from "../components/ModalForm";
+
 export default {
   data: function() {
     return {
@@ -90,107 +86,59 @@ export default {
         }
       ],
       selectedCharacterGroup: 0,
-      characterStates: {
-        "86": null
-      },
-      person: {
-        type: null,
-        type2: null
-      }
-      //   characterStatesMetadata: {
-      //     propertyAnnotations: [
-      //       {
-      //         name: "86",
-      //         displayName: "Street Number2"
-      //       }
-      //     ]
-      //   }
+      characterStates: {}
     };
   },
   computed: {
     insectList() {
       return this.$store.state.insects.filter(this.filterSpeciesList);
     },
+    characterStateCount() {
+      return this.$store.getters.getCharactersStateCount;
+    },
     selectedGroupKey() {
       return this.characterGroups[this.selectedCharacterGroup].key;
     },
     characterListByGroup() {
-      return this.$store.state.characters[this.selectedGroupKey];
+      return this.$store.state.characters.filter(
+        function(character) {
+          return character.group == this.selectedGroupKey;
+        }.bind(this)
+      );
     },
-    help() {
+    characterGroupHelp() {
       return this.characterGroups[this.selectedCharacterGroup].help;
     },
     currentPosibilitiesCount() {
       return this.insectList.length;
     },
-    characterStatesComp() {
-      let states = {};
-      var x;
-      // FIXME: Use map
-      for (x in this.$store.state.characters) {
-        let char = this.$store.state.characters[x];
-        states[char.id] = null;
-      }
-      console.log(states);
-      console.log("XXXXXXXXXXXXXTXTXTXTXTXTXTXTXTXTXTXT");
-      return states;
-    },
-    characterStatesMetadata() {
-      let metadata = {
-        isReadOnly: false,
-        commitMode: "Immediate",
-        validationMode: "Immediate",
-        propertyAnnotations: []
-      };
-      for (let index in this.$store.state.characters) {
-        let character = this.$store.state.characters[index];
-        metadata.propertyAnnotations.push({
-          name: character["id"].toString(),
-          displayName: character["label"],
-          index: Number(index),
-          editor: "Picker",
-          valuesProvider: ["New York", "Washington", "Los Angeles"]
-        });
-      }
-      console.log("XXXXXXXXXXXXXTXTXTXTXTXTXTXTXTXTXTXT");
-      console.log(metadata);
-      return metadata;
+    releventCharacterIDs() {
+      let relevantCharacters = [];
+      let previousCharacterStates = {};
+      this.insectList.forEach(
+        function(species) {
+          for (const [id, states] of Object.entries(species.character_states)) {
+            let characterID = Number(id);
+            // Sort states and stringify to allow comparison with previous states
+            let statesStr = states.sort().toString();
+
+            // If we already know this is a relevant character, skip it
+            if (relevantCharacters.indexOf(characterID) !== -1) {
+              continue;
+            } else if (
+              typeof previousCharacterStates[characterID] !== "undefined" &&
+              previousCharacterStates[characterID] != statesStr
+            ) {
+              relevantCharacters.push(characterID);
+            }
+            // Store the number of character states selected, so it can
+            // be compared to the next species in the list
+            previousCharacterStates[characterID] = statesStr;
+          }
+        }.bind(this)
+      );
+      return relevantCharacters;
     }
-    // Filter list of character states - as it's used in the v-model
-    // characterStates includes false and undefined values
-    // selectedCharacterStates() {
-    //   let selectedCharacterStates = {};
-    //   for (const [characterID, characterState] of Object.entries(
-    //     this.characterStates
-    //   )) {
-    //     if (typeof characterState !== "undefined" && characterState) {
-    //       selectedCharacterStates[characterID] = characterState;
-    //     }
-    //   }
-
-    //   return selectedCharacterStates;
-    // }
-  },
-  create() {
-    console.log("CREATED");
-    // this.characterStates = {
-    //   256: null
-    // };
-  },
-  mounted() {
-    // this.characterStates = this.$store.state.characters.map(function(
-    //   character
-    // ) {
-    //   return {
-    //     [character.id]: null
-    //   };
-    // });
-    console.log("MOUNTED XXXX XXXX XXXX XXX");
-
-    // this.characterStates = {
-    //   256: null
-    // };
-    // console.log(this.characterStates);
   },
   methods: {
     onInsectTap(args) {
@@ -200,41 +148,61 @@ export default {
         }
       });
     },
-    // getCharacterStateSelectedValue(character) {
-    //   return this.characterStates[character.id];
-    // },
-    dropDownSelectedIndexChanged(event) {
-      // Reactive update
-      this.$set(
-        this.characterStates,
-        event.object.id,
-        event.object.selectedValue
-      );
+    getCharacterSelectedStateValue(character) {
+      let selectedStateID = this.characterStates[character.id];
+      if (selectedStateID) {
+        let selectedState = character.states.find(function(state) {
+          return state.id == selectedStateID;
+        });
+        return selectedState.label;
+      }
     },
     filterSpeciesList(species) {
-      //   for (const [characterID, characterState] of Object.entries(
-      //     this.characterStates
-      //   )) {
-      //     // If any character states do not match the species, return flase (hide species)
-      //     if (
-      //       species.character_states[characterID].indexOf(characterState) == -1
-      //     ) {
-      //       return false;
-      //     }
-      //   }
+      for (const [id, state] of Object.entries(this.characterStates)) {
+        // If we have a state defined for this character AND
+        // species has no entry OR
+        // character states do not match the species, return false (hide species)
+        if (
+          state &&
+          (!species.character_states[id] ||
+            species.character_states[id].indexOf(state) == -1)
+        ) {
+          return false;
+        }
+      }
       return true;
     },
     onResetButtonTap() {
-      for (var x in this.person) {
-        this.person[x] = null;
-      }
-      //   console.log("RESET");
-      // Object.assign({}, this.characterStates, {});
-      //   this.characterStates = {};
+      this.characterStates = {};
+      this.refreshChacterList();
     },
-    dfPropertyCommitted() {
-      console.log("COMMIT");
-      console.log(this.person.name);
+    showModalForm(character) {
+      this.$showModal(ModalForm, {
+        props: {
+          character: character,
+          selectedState: this.characterStates[character.id]
+        },
+        fullscreen: false,
+        animated: true,
+        stretched: true,
+        dimAmount: 0.5
+      }).then(
+        function(selectedState) {
+          // If undefined, user has cancelled the modal
+          // If user has selected "remove", return value will be null
+          if (typeof selectedState !== "undefined") {
+            // Reactive update
+            this.$set(this.characterStates, character.id, selectedState);
+            this.refreshChacterList();
+          }
+        }.bind(this)
+      );
+    },
+    refreshChacterList() {
+      this.$refs.characterList.refresh();
+    },
+    isReleventCharacter(character) {
+      return this.releventCharacterIDs.indexOf(character.id) !== -1;
     }
   }
 };
