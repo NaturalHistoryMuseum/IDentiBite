@@ -1,5 +1,5 @@
 import ExploreInsectsPage from './pages/ExploreInsects'
-import InsectIDPage from './pages/InsectID'
+import IdentifyPage from './pages/Identify'
 import HomePage from './pages/Home'
 import FactSheet from './pages/FactSheet'
 import TreatmentPage from './pages/Treatment'
@@ -8,7 +8,7 @@ import TreatmentPage from './pages/Treatment'
 
 const router = {
     exploreInsects: ExploreInsectsPage,
-    insectId: InsectIDPage,
+    identify: IdentifyPage,
     home: HomePage,
     factSheet: FactSheet,
     treatment: TreatmentPage,

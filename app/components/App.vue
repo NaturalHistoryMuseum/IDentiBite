@@ -4,7 +4,7 @@
       <StackLayout ~drawerContent backgroundColor="#eee">
         <Label class="h1" text="IDentiBite"></Label>
         <Label text="Home" @tap="$goto('home')"></Label>
-        <Label text="Start Insect ID" @tap="$goto('insectId')"></Label>
+        <Label text="Start Insect ID" @tap="$goto('identify')"></Label>
         <Label text="Explore Insects" @tap="$goto('exploreInsects')"></Label>
         <StackLayout class="hr-light m-10"></StackLayout>
         <Label text="About"></Label>
