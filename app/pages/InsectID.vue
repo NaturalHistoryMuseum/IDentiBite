@@ -3,7 +3,7 @@
 <template>
   <Page>
     <Header page-title="Insect ID" />
-    <GridLayout rows="*, 120">
+    <GridLayout rows="*, 140">
       <StackLayout row="0">
         <SegmentedBar v-model="selectedCharacterGroup">
           <SegmentedBarItem
@@ -34,21 +34,35 @@
         </ListView>
       </StackLayout>
 
-      <StackLayout row="1">
+      <StackLayout row="1" @tap="$tapPreventPropagation">
         <Label>Current possibilities {{ currentPosibilitiesCount }}</Label>
         <RadListView
           ref="listView"
           orientation="horizontal"
           for="insect in insectList"
           @itemTap="onInsectTap"
+          itemWidth="100"
+          :sortingFunction="sortInsects"
+          :gridSpanCount="currentPosibilitiesCount"
         >
           <v-template>
-            <FlexboxLayout class="insect">
-              <StackLayout class="item" orientation="vertical">
-                <Image height="100" :src="insect.images[0] | imageAssetPath" />
-                <Label :text="insect.common_name" class="nameLabel"></Label>
-              </StackLayout>
-            </FlexboxLayout>
+            <GridLayout
+              rows="*, 30"
+              width="100"
+              height="210"
+              backgroundColor="lightgray"
+              class="item"
+              orientation="horizontal"
+            >
+              <Image
+                @tap="$tapPreventPropagation"
+                height="100"
+                width="100"
+                :src="insect.images[0] | imageAssetPath"
+                row="0"
+              />
+              <Label :text="insect.common_name" class="nameLabel" row="1"></Label>
+            </GridLayout>
           </v-template>
         </RadListView>
       </StackLayout>
@@ -141,12 +155,23 @@ export default {
     }
   },
   methods: {
-    onInsectTap(args) {
-      this.$goto("factSheet", {
-        props: {
-          name: args.item.scientific_name
-        }
-      });
+    onInsectTap(event) {
+      console.log("1");
+      console.log(event.item.common_name);
+      //   this.$goto("factSheet", {
+      //     props: {
+      //       name: event.item.scientific_name
+      //     }
+      //   });
+    },
+    onInsectTap2(event) {
+      console.log("1");
+      console.log(event.common_name);
+      //   this.$goto("factSheet", {
+      //     props: {
+      //       name: event.item.scientific_name
+      //     }
+      //   });
     },
     getCharacterSelectedStateValue(character) {
       let selectedStateID = this.characterStates[character.id];
@@ -203,8 +228,16 @@ export default {
     },
     isReleventCharacter(character) {
       return this.releventCharacterIDs.indexOf(character.id) !== -1;
+    },
+    sortInsects(insectA, insectB) {
+      return insectA.common_name < insectB.common_name ? -1 : 1;
     }
   }
 };
 </script>
 
+<style>
+.item {
+  margin-right: 20px;
+}
+</style>

@@ -11,21 +11,18 @@ Vue.use(VueDevtools)
 import RadListView from 'nativescript-ui-listview/vue';
 Vue.use(RadListView);
 
-// Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
-
-import PickerField from "nativescript-picker/vue";
-Vue.use(PickerField);
-
-// Data form
-import RadDataForm from 'nativescript-ui-dataform/vue';
-Vue.use(RadDataForm);
-
+import { ModalStack, overrideModalViewMethod, VueWindowedModal } from "nativescript-windowed-modal"
+overrideModalViewMethod()
+Vue.registerElement("ModalStack", () => ModalStack)
+Vue.use(VueWindowedModal)
 
 // Routing
 import router from './router'
 
+// Prototype functions
 Vue.prototype.$router = router
 Vue.prototype.$goto = function (to, options = {}) {
+
     this.$closeDrawer();
     // Merge frame option into any option parameters
     Object.assign(options, { frame: "mainContent" });
@@ -40,12 +37,7 @@ Vue.prototype.$goto = function (to, options = {}) {
     )
 }
 
-
-import { ModalStack, overrideModalViewMethod, VueWindowedModal } from "nativescript-windowed-modal"
-
-overrideModalViewMethod()
-Vue.registerElement("ModalStack", () => ModalStack)
-Vue.use(VueWindowedModal)
+Vue.prototype.$tapPreventPropagation = function () { }
 
 Vue.prototype.$showDrawer = function () {
     Vue.prototype.drawer.showDrawer();
