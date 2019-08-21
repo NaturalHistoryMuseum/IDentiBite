@@ -42,7 +42,7 @@ export default {
   margin: 20;
   margin-top: 35;
   border-radius: 8;
-  horizontal-align: center;
+  /* horizontal-align: center; */
   vertical-align: middle;
   background-color: white;
   width: auto;

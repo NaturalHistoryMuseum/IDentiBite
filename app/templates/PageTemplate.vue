@@ -13,7 +13,7 @@
           <Label text="Navigation Menu"></Label>
         </StackLayout>
         <StackLayout class="sideStackLayout">
-          <Label text="Start Insect ID" @tap="$goto('insectId')"></Label>
+          <Label text="Identify" @tap="$goto('identify')"></Label>
           <Label text="Explore Insects" @tap="$goto('exploreInsects')"></Label>
           <StackLayout class="hr-light m-10"></StackLayout>
           <Label text="About"></Label>
