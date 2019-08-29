@@ -1,8 +1,91 @@
 // NativeScript core theme
 // @see https://docs.nativescript.org/ui/theme
-@import '~nativescript-theme-core/scss/aqua';
+@import '~nativescript-theme-core/scss/light';
 
 // Override variables here
+
+@import './scss/variables';
+
+@import './scss/classes';
+
+.hr{
+    background: $dark-red;
+}
+
+label.body {
+    margin: 20px 40px;
+}
+
+label.body,
+.body-item{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+label.body-header{
+    background: $light-grey;
+    padding-left: 40px;
+    color: $primary;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 15px 0 5px 0;
+}
+
+RadListView{
+    label.body-header{
+        margin: 0 0 2px 0;
+    }
+}
+
+button.fa{
+    font-size: 26px;
+}
+
+
+.list-group {
+  .list-group-item {
+    padding: 0;
+  }
+}
+
+.image-horizontal-scroll{
+    padding: 40px 40px 10px 40px;
+    image{
+        margin-left: 20px;
+        &.image-first{
+            margin-left: 0;
+        }
+    }
+}
+
+SegmentedBar {
+  selected-background-color: $dark-red;
+  border-width: 1;
+  border-color: $dark-red;
+  border-radius: 0;
+  padding: 0;
+  .segmented-bar-item {
+    border-radius: 5;
+    border-width: 1;
+    border-color: orangered;
+    padding: 0;
+  }
+}
+
+// .subheader {
+//   background: $dark-red;
+//   margin: 0 0 2px 0;
+//   min-height: 5px;
+// }
+
+.bold{
+    // font-weight: bold;
+}
+
+  span.label {
+    margin-right: 10px;
+  }
+
 
 @import '~nativescript-theme-core/scss/index';
 
@@ -11,6 +94,8 @@
 
 // $red: #EE0410;
 
+// $black: #383636;
+
 .fa {
     font-family: 'FontAwesome', 'fontawesome-webfont';
     font-size: 40;
@@ -18,4 +103,14 @@
 
 .right {
   horizontal-align: right;
+}
+
+.image-list{
+    Image{
+        border: 1px solid red;
+    }
+}
+
+Image{
+    border: 1px solid yellow;
 }
