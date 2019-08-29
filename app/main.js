@@ -58,6 +58,10 @@ Vue.prototype.$closeDrawer = function () {
 import Header from "./components/Header";
 Vue.component('Header', Header);
 
+// Register the subheader component globally
+import SubHeader from "./components/SubHeader";
+Vue.component('SubHeader', SubHeader);
+
 if (TNS_ENV !== 'production') {
     Vue.use(VueDevtools)
 }
