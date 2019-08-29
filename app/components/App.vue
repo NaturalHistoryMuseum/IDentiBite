@@ -1,11 +1,12 @@
 <template>
-  <Page actionBarHidden="true">
+  <Page actionBarHidden="true" class="page">
     <RadSideDrawer ref="drawer">
       <StackLayout ~drawerContent backgroundColor="#eee">
         <Label class="h1" text="IDentiBite"></Label>
         <Label text="Home" @tap="$goto('home')"></Label>
-        <Label text="Start Insect ID" @tap="$goto('identify')"></Label>
-        <Label text="Explore Insects" @tap="$goto('exploreInsects')"></Label>
+        <Label text="Identify" @tap="$goto('identify')"></Label>
+        <Label text="Explore" @tap="$goto('explore')"></Label>
+        <Label text="Treatment" @tap="$goto('treatment')"></Label>
         <StackLayout class="hr-light m-10"></StackLayout>
         <Label text="About"></Label>
       </StackLayout>
