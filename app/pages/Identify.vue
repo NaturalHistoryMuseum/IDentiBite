@@ -1,16 +1,20 @@
 <template>
   <Page>
-    <Header page-title="Insect ID" />
+    <Header page-title="Identify" />
     <GridLayout rows="*, 200">
       <StackLayout row="0">
         <SegmentedBar v-model="selectedCharacterGroup">
           <SegmentedBarItem
             v-for="group in characterGroups"
             :title="group.title"
-            v-bind:key="group"
+            v-bind:key="group.key"
+            class="segmented-bar-item"
           />
         </SegmentedBar>
-        <Label :text="characterGroupHelp"></Label>
+        <SubHeader>
+          <Label :text="characterGroupHelp" class="m-t-5 m-b-5 body-item" />
+        </SubHeader>
+
         <Button text="Reset" @tap="onResetButtonTap" />
         <ListView for="character in characterListByGroup" ref="characterList">
           <v-template>
@@ -20,7 +24,9 @@
                 :text="character.label"
                 textWrap="true"
                 @tap="showModalForm(character)"
-                :backgroundColor="isReleventCharacter(character) ? 'red' : 'yellow'"
+                :backgroundColor="
+                  isReleventCharacter(character) ? 'red' : 'yellow'
+                "
               />
               <Label
                 col="1"
@@ -37,7 +43,7 @@
         <ScrollView orientation="horizontal">
           <StackLayout orientation="horizontal" class="list-group" height="200">
             <GridLayout
-              @tap="onSpeciesTap({species})"
+              @tap="onSpeciesTap({ species })"
               v-for="species in speciesList"
               v-bind:key="species.id"
               :columns="speciesList.length"
@@ -46,8 +52,17 @@
               backgroundColor="lightgray"
               rows="*, 50"
             >
-              <Image height="100" width="100" :src="species.images[0] | imageAssetPath" row="0" />
-              <Label :text="species.common_name" class="nameLabel" row="1"></Label>
+              <Image
+                height="100"
+                width="100"
+                :src="species.images[0] | imageAssetPath"
+                row="0"
+              />
+              <Label
+                :text="species.common_name"
+                class="nameLabel"
+                row="1"
+              ></Label>
             </GridLayout>
           </StackLayout>
         </ScrollView>
@@ -71,7 +86,7 @@ export default {
         {
           key: "where",
           title: "Where",
-          help: "Where did the bit happen?"
+          help: "Where did the bite happen?"
         },
         {
           key: "when",
@@ -81,7 +96,7 @@ export default {
         {
           key: "what",
           title: "What?",
-          help: "What did the insect look like?"
+          help: "What did the species look like?"
         }
       ],
       selectedCharacterGroup: 0,
@@ -90,7 +105,7 @@ export default {
   },
   computed: {
     speciesList() {
-      return this.$store.state.insects.filter(this.filterSpeciesList);
+      return this.$store.state.species.filter(this.filterSpeciesList);
     },
     characterStateCount() {
       return this.$store.getters.getCharactersStateCount;
@@ -202,10 +217,10 @@ export default {
     },
     isReleventCharacter(character) {
       return this.releventCharacterIDs.indexOf(character.id) !== -1;
-    },
-    sortInsects(insectA, insectB) {
-      return insectA.common_name < insectB.common_name ? -1 : 1;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

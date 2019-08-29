@@ -1,29 +1,107 @@
 <template>
   <Page>
-    <Header :page-title="insectName" />
-    <StackLayout orientation="Vertical">
-      <label :text="insect.genus" />
-      <Label
-        :text="description"
-        v-for="description in insect.description"
-        v-bind:key="description"
-        textWrap="true"
-      />
-      <Image :src="image | imageAssetPath" v-for="image in insect.images" v-bind:key="image" />
+    <Header :page-title="species.common_name" />
+    <StackLayout>
+      <SubHeader>
+        <GridLayout
+          columns="auto, auto, auto, auto"
+          height="34"
+          paddingLeft="10"
+        >
+          <Label col="0">
+            <FormattedString>
+              <Span text="Genus:" fontWeight="Bold" />
+            </FormattedString>
+          </Label>
+          <Label
+            col="1"
+            :text="species.genus"
+            marginLeft="2"
+            marginRight="10"
+          />
+          <Label col="2">
+            <FormattedString>
+              <Span text="Species:" fontWeight="Bold" />
+            </FormattedString>
+          </Label>
+          <Label col="3" :text="species.species" marginLeft="2" />
+        </GridLayout>
+      </SubHeader>
+
+      <ScrollView>
+        <StackLayout>
+          <ScrollView orientation="horizontal">
+            <StackLayout
+              orientation="horizontal"
+              class="image-horizontal-scroll"
+            >
+              <Image
+                :src="image.file | imageAssetPath"
+                v-for="(image, index) in species.images"
+                v-bind:key="image"
+                @tap="showModalImage(species.common_name, image)"
+                height="240"
+                :class="{ 'image-first': index === 0 }"
+              />
+            </StackLayout>
+          </ScrollView>
+          <Label
+            :text="description"
+            v-for="description in species.description"
+            v-bind:key="description"
+            textWrap="true"
+            class="body"
+          />
+          <Label text="Bites and stings" class="body-header" />
+          <Warning :text="species.warning" />
+          <Label
+            :text="bites"
+            v-for="bites in species.bites_stings"
+            v-bind:key="bites"
+            textWrap="true"
+            class="body"
+          />
+          <Label text="Resources" class="body-header" />
+          <Label
+            :text="resource"
+            v-for="resource in species.resources"
+            v-bind:key="resource"
+            textWrap="true"
+            class="body"
+          />
+        </StackLayout>
+      </ScrollView>
     </StackLayout>
   </Page>
 </template>
 
 
 <script>
+import ModalImage from "../components/ModalImage";
+import Warning from "../components/Warning";
+
 export default {
   props: ["name"],
+  components: {
+    Warning
+  },
   computed: {
-    insect() {
-      return this.$store.getters.getInsectByScientificName(this.name);
-    },
-    insectName() {
-      return `${this.insect.common_name} ${this.insect.group}`;
+    species() {
+      return this.$store.getters.getSpeciesByScientificName(this.name);
+    }
+  },
+  methods: {
+    showModalImage(title, image) {
+      this.$showModal(ModalImage, {
+        props: {
+          title: title,
+          image: image
+        },
+        fullscreen: true,
+        animated: false,
+        stretched: false,
+        dimAmount: 0.5
+      });
     }
   }
 };

@@ -1,10 +1,14 @@
 <template>
-  <Page>
-    <StackLayout orientation="Vertical">
-      <Label class="fa right" @tap="$showDrawer()" :text="'fa-bars' | fonticon" />
+  <Page actionBarHidden="true">
+    <StackLayout>
+      <Button
+        class="fa right"
+        @tap="$showDrawer()"
+        :text="'fa-bars' | fonticon"
+      />
       <Image :src="'logo.png' | imageAssetPath" />
-      <Button text="Start Insect ID" @tap="$goto('identify')"></Button>
-      <Button text="Explore Insects" @tap="$goto('exploreInsects')"></Button>
+      <Button text="Identify" @tap="$goto('identify')"></Button>
+      <Button text="Explore" @tap="$goto('explore')"></Button>
       <Button text="Treatment" @tap="$goto('treatment')"></Button>
     </StackLayout>
   </Page>
