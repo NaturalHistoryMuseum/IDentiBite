@@ -2,10 +2,10 @@
   <ActionBar class="action-bar" flat="true">
     <NavigationButton android.systemIcon="ic_menu_back" @tap="onBackTap" />
     <GridLayout columns="*, 120" width="100%">
-      <Label col="0" :text="pageTitle" />
+      <Label class="action-bar-title" col="0" :text="pageTitle" />
       <Button
         col="1"
-        class="fa"
+        class="fa action-bar-menu-item"
         @tap="$showDrawer()"
         :text="'fa-bars' | fonticon"
       ></Button>
@@ -25,11 +25,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.action-bar {
-  label {
-    font-size: 26px;
-  }
-}
-</style>

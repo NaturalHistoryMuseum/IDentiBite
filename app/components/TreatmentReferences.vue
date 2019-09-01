@@ -1,6 +1,6 @@
 <template>
   <StackLayout>
-    <Label text="References" textWrap="true" class="body-header" />
+    <Label text="References" textWrap="true" class="h2" />
     <Label
       textWrap="true"
       class="body"

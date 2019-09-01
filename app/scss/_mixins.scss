@@ -1,0 +1,22 @@
+
+@mixin header-bar {
+    background: $red;
+    border-bottom-color: $dark-red;
+    border-bottom-width: 3;
+    color: $white;
+    padding-left: $page-margin;
+    font-size: $font-size-large;
+}
+
+@mixin h2 {
+    background: $light-grey;
+    padding-left: $page-margin;
+    color: $primary;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 15px 0 5px 0;
+    // font-weight: bold;
+    font-size: $font-size-medium;
+}
+
+

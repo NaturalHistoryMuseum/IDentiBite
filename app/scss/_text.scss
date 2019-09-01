@@ -1,0 +1,15 @@
+.text-muted{
+    color: $medium-grey;
+}
+
+.text-italic{
+    font-style: italic;
+}
+
+.h2{
+    @include h2;
+}
+
+.body{
+    margin: $page-margin;
+}

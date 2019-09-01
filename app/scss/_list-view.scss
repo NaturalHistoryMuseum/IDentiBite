@@ -1,0 +1,8 @@
+.list-view {
+    separator-color: $light-grey;
+    .list-group{
+        @include h2;
+        margin: 0;
+    }
+
+}

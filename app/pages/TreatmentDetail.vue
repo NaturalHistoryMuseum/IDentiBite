@@ -1,22 +1,24 @@
 ]<template>
   <Page>
-    <Header :page-title="treatment.title" />
+    <Header :page-title="treatment.short_title" />
     <StackLayout>
-      <StackLayout class="hr m-b-1" height="5"></StackLayout>
+      <SubHeader>
+        <Label :text="treatment.title" height="20" />
+      </SubHeader>
       <ScrollView>
         <StackLayout>
           <Image
             col="0"
             :src="treatment['image']['file'] | imageAssetPath"
             @tap="showModalImage(treatment.title, treatment.image)"
-            class="body-item"
+            class="page-margins"
           />
           <Label
             :text="text"
             v-for="text in treatment.text"
             v-bind:key="text"
             textWrap="true"
-            :class="isTitle(text) ? 'body-header' : 'body'"
+            :class="isTitle(text) ? 'h2' : 'body'"
           />
           <Warning :text="treatment.warning" />
           <TreatmentReferences />
@@ -65,9 +67,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// .page-content {
-//   padding: 40px;
-// }
-</style>
 

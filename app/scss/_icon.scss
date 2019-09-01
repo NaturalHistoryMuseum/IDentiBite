@@ -1,0 +1,16 @@
+
+.fa {
+    font-family: 'FontAwesome', 'fontawesome-webfont';
+    font-size: 40;
+}
+
+button.fa{
+    font-size: 26px;
+}
+
+.icon{
+    &.icon-red{
+        color: $red;
+    }
+}
+

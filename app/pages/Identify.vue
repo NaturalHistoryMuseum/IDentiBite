@@ -1,9 +1,9 @@
 <template>
   <Page>
     <Header page-title="Identify" />
-    <GridLayout rows="*, 200">
+    <GridLayout rows="*, 160">
       <StackLayout row="0">
-        <SegmentedBar v-model="selectedCharacterGroup">
+        <SegmentedBar v-model="selectedCharacterGroup" class="segmented-bar">
           <SegmentedBarItem
             v-for="group in characterGroups"
             :title="group.title"
@@ -12,51 +12,79 @@
           />
         </SegmentedBar>
         <SubHeader>
-          <Label :text="characterGroupHelp" class="m-t-5 m-b-5 body-item" />
+          <Label :text="characterGroupHelp" />
         </SubHeader>
 
-        <Button text="Reset" @tap="onResetButtonTap" />
-        <ListView for="character in characterListByGroup" ref="characterList">
+        <ListView
+          for="character in characterListByGroup"
+          ref="characterList"
+          class="character-list list-view"
+        >
           <v-template>
-            <GridLayout columns="*, *" backgroundColor="pink">
+            <GridLayout
+              columns="*, 160"
+              :class="isReleventCharacter(character) ? 'active' : 'disabled'"
+            >
               <Label
                 col="0"
                 :text="character.label"
                 textWrap="true"
                 @tap="showModalForm(character)"
-                :backgroundColor="
-                  isReleventCharacter(character) ? 'red' : 'yellow'
-                "
+                class="character-label"
               />
               <Label
                 col="1"
                 :text="getCharacterSelectedStateValue(character)"
                 @tap="showModalForm(character)"
+                class="character-state"
+                height="30"
               />
             </GridLayout>
           </v-template>
         </ListView>
       </StackLayout>
 
-      <StackLayout row="1">
-        <Label>Current possibilities {{ currentPosibilitiesCount }}</Label>
+      <StackLayout row="1" class="identify-results" verticalAlignment="bottom">
+        <GridLayout
+          columns="auto, 40, *, 80"
+          height="24"
+          verticalAlignment="middle"
+          class="m-t-5 m-b-5 page-side-margins"
+        >
+          <Label col="0" text="Current possibilities:" />
+          <Label
+            col="1"
+            class="current-possibilities-count"
+            :text="currentPosibilitiesCount"
+            textAlignment="center"
+          />
+          <Button
+            class="btn btn-dark-grey btn-small btn-rounded-sm"
+            col="3"
+            width="80"
+            text="Reset"
+            @tap="onResetButtonTap"
+          />
+        </GridLayout>
+
         <ScrollView orientation="horizontal">
-          <StackLayout orientation="horizontal" class="list-group" height="200">
+          <StackLayout orientation="horizontal" height="130">
             <GridLayout
               @tap="onSpeciesTap({ species })"
               v-for="species in speciesList"
               v-bind:key="species.id"
               :columns="speciesList.length"
-              width="100"
-              height="150"
-              backgroundColor="lightgray"
-              rows="*, 50"
+              width="130"
+              height="130"
+              rows="*, 30"
+              class="identify-results-item"
             >
               <Image
                 height="100"
-                width="100"
-                :src="species.images[0] | imageAssetPath"
+                width="130"
+                :src="species.images[0].file | imageAssetPath"
                 row="0"
+                stretch="aspectFill"
               />
               <Label
                 :text="species.common_name"
@@ -191,36 +219,92 @@ export default {
       this.refreshChacterList();
     },
     showModalForm(character) {
-      this.$showModal(ModalForm, {
-        props: {
-          character: character,
-          selectedState: this.characterStates[character.id]
-        },
-        fullscreen: false,
-        animated: true,
-        stretched: true,
-        dimAmount: 0.5
-      }).then(
-        function(selectedState) {
-          // If undefined, user has cancelled the modal
-          // If user has selected "remove", return value will be null
-          if (typeof selectedState !== "undefined") {
-            // Reactive update
-            this.$set(this.characterStates, character.id, selectedState);
-            this.refreshChacterList();
-          }
-        }.bind(this)
-      );
+      if (this.isReleventCharacter(character)) {
+        this.$showModal(ModalForm, {
+          props: {
+            character: character,
+            selectedState: this.characterStates[character.id]
+          },
+          fullscreen: false,
+          animated: true,
+          stretched: true,
+          dimAmount: 0.5
+        }).then(
+          function(selectedState) {
+            // If undefined, user has cancelled the modal
+            // If user has selected "remove", return value will be null
+            if (typeof selectedState !== "undefined") {
+              // Reactive update
+              this.$set(this.characterStates, character.id, selectedState);
+              this.refreshChacterList();
+            }
+          }.bind(this)
+        );
+      }
     },
     refreshChacterList() {
       this.$refs.characterList.refresh();
     },
     isReleventCharacter(character) {
-      return this.releventCharacterIDs.indexOf(character.id) !== -1;
+      if (this.characterStates[character.id]) {
+        return true;
+      }
+
+      return this.releventCharacterIDs.indexOf(character.id) != -1;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/_variables.scss";
+
+.character-list {
+  .character-label {
+    margin-left: $page-margin;
+    padding-top: 4;
+    padding-bottom: 4;
+    padding-right: 10;
+  }
+  .character-state {
+    background-color: $light-grey;
+    border-radius: 5;
+    padding-left: 10;
+    padding-right: 20;
+    margin: 4;
+    background-image: url("~/assets/images/angle-down-solid.png");
+    background-position: 125px 12px;
+    background-size: 16 9;
+    background-repeat: no-repeat;
+    margin-right: $page-margin;
+  }
+  .disabled {
+    .character-state {
+      opacity: 0.4;
+    }
+    .character-label {
+      color: lighten($primary, 40%);
+    }
+  }
+}
+
+.identify-results {
+  background: $light-grey;
+
+  .current-possibilities-count {
+    background-color: lighten($light-grey, 50);
+    border-radius: 5;
+    margin-left: $page-margin;
+    padding: 2;
+  }
+  .identify-results-item {
+    margin-right: 2;
+    background-color: $white;
+
+    label {
+      padding-left: $page-margin;
+      padding-right: $page-margin;
+    }
+  }
+}
 </style>

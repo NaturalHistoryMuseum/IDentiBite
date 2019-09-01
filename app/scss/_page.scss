@@ -1,0 +1,13 @@
+.page {
+  font-size: $font-size-default;
+  color: $primary
+}
+
+.page-margins{
+    margin: $page-margin;
+}
+
+.page-side-margins{
+    margin-left: $page-margin;
+    margin-right: $page-margin;
+}

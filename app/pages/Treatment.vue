@@ -4,15 +4,12 @@
     <StackLayout>
       <SubHeader />
       <GridLayout>
-        <ListView
-          for="treatment in treatmentList"
-          @itemTap="onTreatmentTap"
-          separatorColor="#f1eff0"
-        >
+        <ListView for="treatment in treatmentList" @itemTap="onTreatmentTap">
           <v-template>
             <ListItem
               :file-name="treatment['image']['file']"
-              :title="treatment.title"
+              :title="treatment.short_title"
+              :subtitle="treatment.title"
             />
           </v-template>
         </ListView>

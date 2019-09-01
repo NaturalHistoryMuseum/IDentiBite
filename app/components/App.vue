@@ -1,14 +1,47 @@
 <template>
   <Page actionBarHidden="true" class="page">
-    <RadSideDrawer ref="drawer">
-      <StackLayout ~drawerContent backgroundColor="#eee">
-        <Label class="h1" text="IDentiBite"></Label>
-        <Label text="Home" @tap="$goto('home')"></Label>
-        <Label text="Identify" @tap="$goto('identify')"></Label>
-        <Label text="Explore" @tap="$goto('explore')"></Label>
-        <Label text="Treatment" @tap="$goto('treatment')"></Label>
-        <StackLayout class="hr-light m-10"></StackLayout>
-        <Label text="About"></Label>
+    <RadSideDrawer ref="drawer" @drawerOpening="onDrawerOpened">
+      <StackLayout ~drawerContent class="sidedrawer-left">
+        <Label class="sidedrawer-header" text="IDentiBite"></Label>
+
+        <ImageButton
+          class="sidedrawer-list-item btn-transparent"
+          icon="fa-home"
+          label="Home"
+          :class="{ 'sidedrawer-list-item-active': buttonIsActive('home') }"
+          @tap="buttonTap('home')"
+        />
+        <ImageButton
+          icon="fa-search"
+          label="Identify"
+          class="sidedrawer-list-item btn-transparent"
+          :class="{ 'sidedrawer-list-item-active': buttonIsActive('identify') }"
+          @tap="buttonTap('identify')"
+        />
+        <ImageButton
+          icon="fa-bug"
+          label="Explore"
+          :class="{ 'sidedrawer-list-item-active': buttonIsActive('explore') }"
+          @tap="buttonTap('explore')"
+          class="sidedrawer-list-item btn-transparent"
+        />
+        <ImageButton
+          icon="fa-heartbeat"
+          label="Treatment"
+          :class="{
+            'sidedrawer-list-item-active': buttonIsActive('treatment')
+          }"
+          @tap="buttonTap('treatment')"
+          class="sidedrawer-list-item btn-transparent"
+        />
+        <StackLayout class="hr-light m-t-15"></StackLayout>
+        <ImageButton
+          icon="fa-info-circle"
+          label="About"
+          :class="{ 'sidedrawer-list-item-active': buttonIsActive('about') }"
+          @tap="buttonTap('about')"
+          class="sidedrawer-list-item btn-transparent"
+        />
       </StackLayout>
       <Frame ~mainContent id="mainContent">
         <HomePage />
@@ -20,26 +53,30 @@
 <script >
 import Vue from "nativescript-vue";
 
+import ImageButton from "../components/ImageButton";
 import HomePage from "~/pages/Home";
 
 export default {
-  components: { HomePage: HomePage },
+  data: function() {
+    return {
+      activeButton: null
+    };
+  },
+  components: { HomePage, ImageButton },
   mounted() {
     Vue.prototype.drawer = this.$refs.drawer.nativeView;
+  },
+  methods: {
+    buttonTap(name) {
+      this.activeButton = name;
+      this.$goto(name);
+    },
+    buttonIsActive(name) {
+      return this.activeButton == name;
+    },
+    onDrawerOpened() {
+      this.activeButton = null;
+    }
   }
 };
 </script>
-
-<style scoped>
-ActionBar {
-  background-color: #53ba82;
-  color: #ffffff;
-}
-
-.message {
-  vertical-align: center;
-  text-align: center;
-  font-size: 20;
-  color: #333333;
-}
-</style>

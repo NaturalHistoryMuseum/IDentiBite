@@ -13,11 +13,12 @@
         :groupingFunction="getSpeciesGroups"
         :sortingFunction="sortSpecies"
         enableCollapsibleGroups="true"
+        class="list-view"
       >
         <v-template name="group">
           <Label
             :text="item.category"
-            class="body-header"
+            class="list-group"
             isUserInteractionEnabled="false"
           />
         </v-template>
@@ -26,6 +27,7 @@
             :file-name="item.images[0]['file']"
             :title="item.common_name"
             :subtitle="item.scientific_name"
+            class="list-group-item"
           />
         </v-template>
       </RadListView>

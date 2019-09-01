@@ -1,11 +1,7 @@
 <template>
-  <StackLayout orientation="horizontal" class="m-t-15 m-b-15 body-item">
-    <Label
-      class="fa red"
-      :text="'fa-exclamation-circle' | fonticon"
-      width="50"
-    />
-    <Label :text="text" class="red" textWrap="true" />
+  <StackLayout orientation="horizontal" class="m-t-15 m-b-15 body">
+    <Label class="fa" :text="'fa-exclamation-circle' | fonticon" width="50" />
+    <Label :text="text" textWrap="true" />
   </StackLayout>
 </template>
 
@@ -16,7 +12,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/_variables.scss";
 label {
-  //   vertical-align: top;
+  color: $red;
 }
 </style>

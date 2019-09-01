@@ -3,11 +3,7 @@
     <Header :page-title="species.common_name" />
     <StackLayout>
       <SubHeader>
-        <GridLayout
-          columns="auto, auto, auto, auto"
-          height="34"
-          paddingLeft="10"
-        >
+        <GridLayout columns="auto, auto, auto, auto" height="16">
           <Label col="0">
             <FormattedString>
               <Span text="Genus:" fontWeight="Bold" />
@@ -52,7 +48,7 @@
             textWrap="true"
             class="body"
           />
-          <Label text="Bites and stings" class="body-header" />
+          <Label text="Bites and stings" class="h2" />
           <Warning :text="species.warning" />
           <Label
             :text="bites"
@@ -61,7 +57,7 @@
             textWrap="true"
             class="body"
           />
-          <Label text="Resources" class="body-header" />
+          <Label text="Resources" class="h2" />
           <Label
             :text="resource"
             v-for="resource in species.resources"

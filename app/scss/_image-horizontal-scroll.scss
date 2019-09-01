@@ -1,0 +1,9 @@
+.image-horizontal-scroll{
+    padding: $page-margin;
+    image{
+        margin-left: 20px;
+        &.image-first{
+            margin-left: 0;
+        }
+    }
+}
