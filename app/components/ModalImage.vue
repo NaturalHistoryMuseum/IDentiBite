@@ -1,11 +1,16 @@
 <template>
-  <ModalStack dismissEnabled="true" class="modal-container">
+  <ModalStack
+    dismissEnabled="true"
+    class="modal-container"
+    verticalPosition="top"
+    horizontalPosition="left"
+  >
     <GridLayout
-      cols="*, 50"
+      columns="*, 60"
       rows="50,*,auto"
       class="modal"
-      height="100%"
       width="100%"
+      height="100%"
     >
       <Image :src="image.file | imageAssetPath" rowSpan="3" colSpan="2" />
       <Label :text="title" textWrap="true" row="0" col="0" />
@@ -13,8 +18,8 @@
         row="0"
         col="1"
         @tap="closeModal"
-        class="pull-right fa"
-        :text="'fa-times' | fonticon"
+        class="fa page-icon pull-right"
+        text.decode="&#xf00d;"
       ></Button>
       <Label
         :text="image.credit"
@@ -41,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .modal-container {
   padding: 0;
-  padding-bottom: 10px;
+  padding-bottom: 0;
   .modal {
     margin: 0;
     margin-top: 0;
