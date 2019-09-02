@@ -40,14 +40,11 @@ Vue.prototype.$updateSelectedPage = function (pageName) {
     SelectedPageService.getInstance().updateSelectedPage(pageName);
 }
 
-
-
-
 // Register the header component globally
 import Header from "./components/Header";
 Vue.component('Header', Header);
 
-// // Register the subheader component globally
+// Register the subheader component globally
 import SubHeader from "./components/SubHeader";
 Vue.component('SubHeader', SubHeader);
 
