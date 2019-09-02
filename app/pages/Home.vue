@@ -7,7 +7,7 @@
           class="fa page-icon page-icon-red pull-right"
           @tap="onDrawerButtonTap()"
           text.decode="&#xf0c9;"
-          width="20"
+          width="30"
         />
         <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
         <Image :src="'logo.png' | imageAssetPath" width="160" id="logo" />
