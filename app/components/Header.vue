@@ -24,13 +24,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../app-variables";
-
-#back-action-item {
-  font-size: 1;
-  width: 1;
-  height: 1;
-}
-</style>
