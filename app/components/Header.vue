@@ -1,24 +1,8 @@
 <template>
   <ActionBar class="action-bar" flat="true">
-    <NavigationButton
-      android.systemIcon="ic_menu_back"
-      @tap="onBackTap"
-      ios.position="left"
-      id="back-action-item"
-    />
-    <ActionItem
-      ios:visibility="collapsed"
-      icon="res://menu"
-      @tap="onDrawerButtonTap"
-    ></ActionItem>
-
-    <ActionItem
-      icon="res://navigation/menu"
-      android:visibility="collapsed"
-      @tap="onDrawerButtonTap"
-      ios.position="right"
-      height="50"
-    >
+    <NavigationButton icon="res://back" @tap="onBackTap" ios.position="left" />
+    <ActionItem @tap="onDrawerButtonTap" ios.position="right" height="50">
+      <Label text.decode="&#xf0c9;" class="fa" />
     </ActionItem>
     <Label class="action-bar-title" :text="pageTitle"></Label>
   </ActionBar>
@@ -45,9 +29,8 @@ export default {
 @import "../app-variables";
 
 #back-action-item {
-  color: #fff;
-  font-size: 40;
-  width: 40;
-  height: 40;
+  font-size: 1;
+  width: 1;
+  height: 1;
 }
 </style>
