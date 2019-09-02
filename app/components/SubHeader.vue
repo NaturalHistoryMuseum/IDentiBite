@@ -29,7 +29,7 @@ export default {
 }
 
 .subheader-has-content {
-  padding-top: 6;
-  padding-bottom: 6;
+  //   padding-top: 2;
+  //   padding-bottom: 2;
 }
 </style>
