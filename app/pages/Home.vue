@@ -1,74 +1,84 @@
 <template>
-  <Page actionBarHidden="true" id="home">
+  <Page class="page" actionBarHidden="true">
+    <Header page-title="Home" />
     <ScrollView>
       <StackLayout>
         <Button
-          class="fa icon icon-red pull-right"
-          @tap="$showDrawer()"
-          :text="'fa-bars' | fonticon"
+          class="fa page-icon page-icon-red pull-right"
+          @tap="onDrawerButtonTap()"
+          text.decode="&#xf0c9;"
         />
         <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
-        <Image :src="'logo.png' | imageAssetPath" width="200" id="logo" />
+        <Image :src="'logo.png' | imageAssetPath" width="160" id="logo" />
 
-        <ImageButton
-          icon="fa-search"
-          label="Identify"
+        <GridLayout
+          columns="auto, *"
           @tap="$goto('identify')"
-          class="btn-primary"
-        />
-        <ImageButton icon="fa-bug" label="Explore" @tap="$goto('explore')" />
-        <ImageButton
-          icon="fa-heartbeat"
-          label="Treatment"
-          @tap="$goto('treatment')"
-        />
+          class="btn btn-primary"
+        >
+          <Label col="0" text.decode="&#xf002;" class="fa"></Label>
+          <Label col="1" text="Identify" class="label"></Label>
+        </GridLayout>
+
+        <GridLayout columns="auto, *" @tap="$goto('explore')" class="btn">
+          <Label col="0" text.decode="&#xf188;" class="fa"></Label>
+          <Label col="1" text="Explore" class="label"></Label>
+        </GridLayout>
+
+        <GridLayout columns="auto, *" @tap="$goto('treatment')" class="btn">
+          <Label col="0" text.decode="&#xf21e;" class="fa"></Label>
+          <Label col="1" text="Treatment" class="label" textWrap="true"></Label>
+        </GridLayout>
       </StackLayout>
     </ScrollView>
   </Page>
 </template>
 
-
-<script >
-import ImageButton from "../components/ImageButton";
+<script>
+import * as utils from "~/shared/utils";
 
 export default {
-  components: {
-    ImageButton
+  mounted() {
+    this.$updateSelectedPage("home");
+  },
+  methods: {
+    onDrawerButtonTap() {
+      utils.showDrawer();
+    }
   }
 };
 </script>
 
-<style lang="scss">
-@import "../scss/_variables.scss";
+<style scoped lang="scss">
+@import "../app-variables";
 
-#home {
-  button.icon-red {
-    margin-right: $page-margin;
+.page-icon-red {
+  margin-right: $page-margin;
+  font-size: 20;
+}
+
+label.h1 {
+  color: $red;
+  margin-top: 20;
+  margin-bottom: 40;
+}
+
+#logo {
+  margin-bottom: 50;
+}
+
+.btn {
+  margin: 10;
+  width: 220;
+  .fa {
+    font-size: 28;
+    padding-left: 10;
   }
-
-  label.h1 {
-    color: $red;
-    margin-top: 40;
-    margin-bottom: 20;
-  }
-
-  #logo {
-    margin-bottom: 50;
-  }
-
-  .btn {
-    margin: 10;
-    width: 220;
-    .icon {
-      font-size: 28;
-      padding-left: 10;
-    }
-    .label {
-      padding-left: 20;
-      text-align: center;
-      padding-right: 60;
-      font-size: $font-size-medium;
-    }
+  .label {
+    padding-left: 10;
+    text-align: center;
+    padding-right: 40;
+    font-size: $font-size-medium;
   }
 }
 </style>

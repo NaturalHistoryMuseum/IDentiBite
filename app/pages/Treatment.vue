@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page class="page">
     <Header page-title="Treatment" />
     <StackLayout>
       <SubHeader />
@@ -39,6 +39,9 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    this.$updateSelectedPage("treatment");
   }
 };
 </script>

@@ -2,7 +2,7 @@
     min-height: auto;
     color: $red;
     background-color: $light-grey;
-    padding: 5;
+    padding: 15 10;
 
     &.btn-primary{
         color: $white;
@@ -23,12 +23,14 @@
     &.btn-small{
         height: 50px;
         font-size: $font-size-default;
+        padding: 0;
     }
     &.btn-rounded-sm{
         border-radius: 5;
     }
-    .icon{
+    .fa{
       font-size: 24;
+      margin-right: 10;
     }
     
 }

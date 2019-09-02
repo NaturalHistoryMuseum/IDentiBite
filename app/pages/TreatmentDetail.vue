@@ -1,5 +1,5 @@
 ]<template>
-  <Page>
+  <Page class="page">
     <Header :page-title="treatment.short_title" />
     <StackLayout>
       <SubHeader>
@@ -32,7 +32,6 @@
 
 <script>
 import ModalImage from "../components/ModalImage";
-
 import Warning from "../components/Warning";
 import TreatmentReferences from "../components/TreatmentReferences";
 
@@ -63,6 +62,9 @@ export default {
     isTitle(text) {
       return text.split(" ").length == 1;
     }
+  },
+  mounted() {
+    this.$updateSelectedPage("treatment");
   }
 };
 </script>

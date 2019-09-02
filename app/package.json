@@ -1,8 +1,7 @@
 {
+  "main": "app.js",
   "android": {
-    "v8Flags": "--expose_gc"
-  },
-  "main": "main",
-  "name": "identibite",
-  "version": "1.0.0"
+    "v8Flags": "--expose_gc",
+    "markingMode": "none"
+  }
 }

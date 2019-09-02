@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/_variables.scss";
+@import "../app-variables";
 
 .subheader {
   background: $dark-red;

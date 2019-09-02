@@ -1,16 +1,22 @@
 
 .fa {
-    font-family: 'FontAwesome', 'fontawesome-webfont';
-    font-size: 40;
+   font-family: "FontAwesome";
 }
 
-button.fa{
-    font-size: 26px;
-}
+.page-icon{
+    font-size: 26;
+    margin: 0;
 
-.icon{
-    &.icon-red{
+    &.page-icon-red{
         color: $red;
     }
+}
+
+button.page-icon{
+    border-color: transparent;
+    border-width: 1;
+    background-color: transparent;
+    z-index:0;
+    text-transform: capitalize;
 }
 

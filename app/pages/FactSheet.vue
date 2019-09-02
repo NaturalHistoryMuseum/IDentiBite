@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page class="page">
     <Header :page-title="species.common_name" />
     <StackLayout>
       <SubHeader>
@@ -99,6 +99,9 @@ export default {
         dimAmount: 0.5
       });
     }
+  },
+  mounted() {
+    this.$updateSelectedPage("explore");
   }
 };
 </script>

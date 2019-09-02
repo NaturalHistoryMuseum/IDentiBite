@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/_variables.scss";
+@import "../app-variables";
 
 .list-item {
   .list-item-image,

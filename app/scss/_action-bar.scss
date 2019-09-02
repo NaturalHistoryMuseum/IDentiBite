@@ -1,7 +1,10 @@
+/* Action bar*/
+ActionBar .action-bar-title {
+    horizontal-align: center;
+    font-size: 26;
+    font-weight: normal
+}
 
-.action-bar{
-    Label.action-bar-title{
-        font-size: 26;
-        font-weight: normal
-    }
+ActionBar {
+    background-color: $dark-red;
 }

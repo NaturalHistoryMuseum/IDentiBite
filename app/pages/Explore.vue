@@ -1,8 +1,5 @@
-
-
-
 <template>
-  <Page>
+  <Page class="page">
     <Header page-title="Explore" />
     <StackLayout>
       <SubHeader />
@@ -62,7 +59,9 @@ export default {
     sortSpecies(speciesA, speciesB) {
       return speciesA.common_name > speciesB.common_name ? -1 : 1;
     }
+  },
+  mounted() {
+    this.$updateSelectedPage("explore");
   }
 };
 </script>
-

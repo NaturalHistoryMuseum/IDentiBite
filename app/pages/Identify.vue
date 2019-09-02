@@ -1,9 +1,14 @@
-<template>
-  <Page>
+]<template>
+  <Page class="page">
     <Header page-title="Identify" />
     <GridLayout rows="*, 160">
       <StackLayout row="0">
-        <SegmentedBar v-model="selectedCharacterGroup" class="segmented-bar">
+        <SegmentedBar
+          v-model="selectedCharacterGroup"
+          class="segmented-bar"
+          width="100%"
+          height="30"
+        >
           <SegmentedBarItem
             v-for="group in characterGroups"
             :title="group.title"
@@ -24,21 +29,35 @@
             <GridLayout
               columns="*, 160"
               :class="isReleventCharacter(character) ? 'active' : 'disabled'"
+              @tap="showModalForm(character)"
+              verticalAlignment="middle"
             >
               <Label
                 col="0"
                 :text="character.label"
                 textWrap="true"
-                @tap="showModalForm(character)"
                 class="character-label"
+                verticalAlignment="middle"
               />
-              <Label
+              <StackLayout
                 col="1"
-                :text="getCharacterSelectedStateValue(character)"
-                @tap="showModalForm(character)"
                 class="character-state"
+                orientation="horizontal"
+                width="160"
                 height="30"
-              />
+                verticalAlignment="middle"
+              >
+                <Label
+                  width="125"
+                  :text="getCharacterSelectedStateValue(character)"
+                  verticalAlignment="middle"
+                />
+                <Label
+                  text.decode="&#xf078;"
+                  class="fa page-icon"
+                  verticalAlignment="middle"
+                />
+              </StackLayout>
             </GridLayout>
           </v-template>
         </ListView>
@@ -98,6 +117,8 @@
     </GridLayout>
   </Page>
 </template>
+
+
 
 <script>
 import ModalForm from "../components/ModalForm";
@@ -182,6 +203,9 @@ export default {
       return relevantCharacters;
     }
   },
+  mounted() {
+    this.$updateSelectedPage("identify");
+  },
   methods: {
     onSpeciesTap(item) {
       this.$goto("factSheet", {
@@ -257,7 +281,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/_variables.scss";
+@import "../app-variables";
 
 .character-list {
   .character-label {
@@ -270,13 +294,13 @@ export default {
     background-color: $light-grey;
     border-radius: 5;
     padding-left: 10;
-    padding-right: 20;
+    padding-right: 10;
     margin: 4;
-    background-image: url("~/assets/images/angle-down-solid.png");
-    background-position: 125px 12px;
-    background-size: 16 9;
-    background-repeat: no-repeat;
     margin-right: $page-margin;
+    vertical-align: middle;
+    label.fa {
+      font-size: 14;
+    }
   }
   .disabled {
     .character-state {
