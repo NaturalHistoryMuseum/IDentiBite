@@ -3,7 +3,11 @@
     <Header :page-title="species.common_name" />
     <StackLayout>
       <SubHeader>
-        <GridLayout columns="auto, auto, auto, auto" height="16">
+        <GridLayout
+          columns="auto, auto, auto, auto"
+          height="30"
+          class="species-genus"
+        >
           <Label col="0">
             <FormattedString>
               <Span text="Genus:" fontWeight="Bold" />
@@ -34,7 +38,7 @@
               <Image
                 :src="image.file | imageAssetPath"
                 v-for="(image, index) in species.images"
-                v-bind:key="image"
+                v-bind:key="image.file"
                 @tap="showModalImage(species.common_name, image)"
                 height="240"
                 :class="{ 'image-first': index === 0 }"
@@ -106,5 +110,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.species-genus {
+  label {
+    vertical-align: middle;
+  }
+}
 </style>

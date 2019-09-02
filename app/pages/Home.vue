@@ -54,7 +54,7 @@ export default {
 
 .page-icon-red {
   margin-right: $page-margin;
-  font-size: 20;
+  font-size: 26;
 }
 
 label.h1 {

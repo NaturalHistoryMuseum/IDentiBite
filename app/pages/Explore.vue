@@ -65,3 +65,13 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+@import "../app-variables";
+.list-view {
+  background-color: $light-grey;
+  .list-group-item {
+    background-color: $white;
+  }
+}
+</style>
