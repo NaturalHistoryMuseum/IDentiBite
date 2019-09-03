@@ -54,8 +54,10 @@ export default {
 @import "../app-variables";
 
 .page-icon-red {
-  margin-right: $page-margin;
   font-size: 26;
+  padding: 0;
+  margin: 0;
+  margin-right: $page-margin;
 }
 
 label.h1 {
