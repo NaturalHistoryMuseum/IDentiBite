@@ -1,8 +1,7 @@
 <template>
   <StackLayout
-    class="subheader"
-    minHeight="3"
-    :class="{ 'subheader-has-content': hasDefaultSlot }"
+    class="subheader vertical-align"
+    :height="hasDefaultSlot ? 30 : 3"
   >
     <slot></slot>
   </StackLayout>
@@ -18,7 +17,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../app-variables";
 
 .subheader {
@@ -26,10 +25,5 @@ export default {
   color: $white;
   padding-left: $page-margin;
   padding-right: $page-margin;
-}
-
-.subheader-has-content {
-  //   padding-top: 2;
-  //   padding-bottom: 2;
 }
 </style>
