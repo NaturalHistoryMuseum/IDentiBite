@@ -3,7 +3,7 @@
     <Header :page-title="treatment.short_title" />
     <StackLayout>
       <SubHeader>
-        <Label :text="treatment.title" height="30" />
+        <Label :text="treatment.title" />
       </SubHeader>
       <ScrollView>
         <StackLayout>

@@ -1,15 +1,25 @@
 /* Action bar*/
-ActionBar .action-bar-title {
-    horizontal-align: center;
-    font-size: 26;
-    font-weight: normal
-}
 
-ActionBar {
+ActionBar{
+
     background-color: $dark-red;
     padding: 0 $page-margin;
-}
+    margin: 0;
 
-ActionBar .fa{
-    font-size: 26;
+    .action-bar-title {
+        horizontal-align: center;
+        font-size: 26;
+        font-weight: normal
+    }
+
+    .fa{
+        font-size: 26;
+    }
+
+    NavigationButton{
+        margin: 0;
+        padding: 0;
+    }
+
+
 }

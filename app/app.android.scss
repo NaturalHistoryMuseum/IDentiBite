@@ -8,15 +8,18 @@
 // Import common styles
 @import 'app-common';
 
+// Can't style segmented bar items, so make the whole bar red :(
 SegmentedBar.segmented-bar{
   color: $white;
   background-color: $dark-red;
   selected-background-color: $white;
 }
 
-.sidedrawer{
-  #sidedrawer-header {
-    padding-top: 12;
-    height: 56;
-  }
+// Android puts the back button too far to the right, so remove the padding to fix
+ActionBar{
+    padding-left: 0;
+}
+
+.vertical-align {
+  vertical-align: middle;
 }

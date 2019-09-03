@@ -7,3 +7,12 @@
 
 // Import common styles
 @import 'app-common';
+
+// IOS requires vertical hight to align center - but android
+// then aligns top everything
+.vertical-align {
+  label {
+    height: 100%;
+    vertical-align: middle;
+  }
+}

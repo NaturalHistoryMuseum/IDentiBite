@@ -6,7 +6,7 @@
         <GridLayout
           columns="auto, auto, auto, auto"
           height="30"
-          class="species-genus"
+          class="species-genus vertical-align"
         >
           <Label col="0">
             <FormattedString>

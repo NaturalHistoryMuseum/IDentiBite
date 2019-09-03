@@ -17,11 +17,7 @@
           />
         </SegmentedBar>
         <SubHeader>
-          <Label
-            :text="characterGroupHelp"
-            height="30"
-            verticalAlignment="middle"
-          />
+          <Label :text="characterGroupHelp" />
         </SubHeader>
 
         <ListView
