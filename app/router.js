@@ -5,6 +5,7 @@ import FactSheet from './pages/FactSheet'
 import TreatmentPage from './pages/Treatment'
 import TreatmentDetailPage from './pages/TreatmentDetail'
 import About from './pages/About'
+import Modal from './pages/Modal'
 
 
 const router = {
@@ -14,7 +15,8 @@ const router = {
     factSheet: FactSheet,
     treatment: TreatmentPage,
     treatmentDetail: TreatmentDetailPage,
-    about: About
+    about: About,
+    modal: Modal
 }
 
 export default router
