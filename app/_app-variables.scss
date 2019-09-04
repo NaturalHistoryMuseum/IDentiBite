@@ -13,7 +13,7 @@ $page-icon-color: #D7D7D7 !default;
 $red: #EE0510;
 $dark-red: #CB0000;
 
-$dark-grey:  darken(#737171, 20%);
+$dark-grey:  #5C5A5A;
 $medium-grey: #706D6D;
 $light-grey: #F1EFF0;
 $white: #fff;
@@ -56,6 +56,7 @@ $secondary: $dark-grey;
 $text-color: $dark-grey;
 
 // Sizes
+$font-size-small: 12;
 $font-size-default: 14;
 $font-size-medium: 18;
 $font-size-large: 22;

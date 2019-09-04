@@ -31,6 +31,7 @@
               :class="isReleventCharacter(character) ? 'active' : 'disabled'"
               @tap="showModalForm(character)"
               verticalAlignment="middle"
+              class="character-list-item list-view-item"
             >
               <Label
                 col="0"
@@ -284,11 +285,15 @@ export default {
 @import "../app-variables";
 
 .character-list {
+  separator-color: $white;
+  margin-top: $page-margin;
+
+  .character-list-item {
+    padding: 3 $page-margin;
+  }
+
   .character-label {
-    margin-left: $page-margin;
-    padding-top: 4;
-    padding-bottom: 4;
-    padding-right: 10;
+    padding-right: $page-margin;
   }
   .character-state {
     background-color: $light-grey;
@@ -314,6 +319,8 @@ export default {
 
 .identify-results {
   background: $light-grey;
+  border-top-width: 1px;
+  border-top-color: darken($light-grey, 10);
 
   .current-possibilities-count {
     background-color: lighten($light-grey, 50);

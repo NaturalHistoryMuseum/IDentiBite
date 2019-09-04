@@ -4,7 +4,7 @@
       id="sidedrawer-header"
       class="sidedrawer-header vertical-align"
     >
-      <Label text="IDentiBite" />
+      <Label text="IDentiBite" class="h1" />
     </StackLayout>
 
     <ScrollView row="1" class="sidedrawer-content">
@@ -72,8 +72,13 @@
             <Label col="1" text="About" />
           </GridLayout>
         </StackLayout>
-        <StackLayout row="1" horizontalAlignment="center">
-          <Label text="Dr Alex Kew" />
+        <StackLayout
+          row="1"
+          horizontalAlignment="center"
+          id="credit"
+          width="100%"
+        >
+          <Label text="Dr Alex Kew" id="dr" />
           <Label text="In association with" class="text-muted" />
           <Image :src="'nhm.png' | imageAssetPath" width="100" height="47" />
         </StackLayout>
@@ -119,18 +124,34 @@ $sidedrawer-list-icon-size: 20;
     padding: 0;
     padding-top: 3;
     padding-bottom: 0;
-    font-size: $font-size-large;
+
     margin-bottom: 0;
     height: 46;
-    // label {
-    //   vertical-align: middle;
-    //   height: 100%;
-    //   //   padding: 10 0 30 0;
-    // }
+    label.h1 {
+      font-size: $font-size-large;
+      color: $white;
+    }
   }
 
   .sidedrawer-content {
     background-color: $side-drawer-background;
+
+    #credit {
+      background-color: $light-grey;
+      padding: $page-margin 0;
+      label {
+        horizontal-align: center;
+        &#dr {
+          font-size: 16;
+          text-transform: uppercase;
+          margin-bottom: 3;
+        }
+        &.text-muted {
+          font-size: $font-size-small;
+          margin-bottom: 6;
+        }
+      }
+    }
   }
 
   .sidedrawer-list-item {

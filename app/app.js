@@ -16,6 +16,7 @@ overrideModalViewMethod()
 Vue.registerElement("ModalStack", () => ModalStack)
 Vue.use(VueWindowedModal)
 
+
 Vue.config.silent = (TNS_ENV === 'production');
 
 import store from './store';
@@ -30,6 +31,13 @@ Vue.prototype.$goto = function (to, options = {}) {
 
     if (to == 'home') {
         options['clearHistory'] = true
+    } else if (to == 'modal') {
+        // Fake it like a modal
+        options['transition'] = {
+            name: "fade",
+            duration: 200,
+            curve: "spring"
+        }
     }
 
     this.$navigateTo(this.$router[to], options);
