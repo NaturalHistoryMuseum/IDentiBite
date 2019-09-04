@@ -2,7 +2,7 @@
   <Page class="page" actionBarHidden="true">
     <Header page-title="Home" />
     <ScrollView>
-      <GridLayout rows="*, 100">
+      <GridLayout rows="*, 80">
         <StackLayout width="100%" row="0">
           <Button
             class="fa page-icon page-icon-red pull-right"
@@ -12,7 +12,7 @@
           />
 
           <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
-          <Image :src="'logo.png' | imageAssetPath" width="160" id="logo" />
+          <Image src="res://logo" width="160" height="160" id="logo" />
 
           <GridLayout
             columns="auto, *"
@@ -43,12 +43,7 @@
           horizontalAlignment="center"
           verticalAlignment="bottom"
         >
-          <Image
-            col="0"
-            :src="'nhm.png' | imageAssetPath"
-            id="nhm"
-            height="40"
-          />
+          <Image col="0" src="res://nhm" id="nhm" height="40" />
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -82,12 +77,12 @@ export default {
 
 label.h1 {
   color: $red;
-  margin-top: 20;
+  margin-top: 10;
   margin-bottom: 30;
 }
 
 #nhm {
-  margin-bottom: $page-margin;
+  //   margin-bottom: $page-margin;
 }
 
 #logo {
