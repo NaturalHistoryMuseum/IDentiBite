@@ -86,7 +86,6 @@ export default {
   padding-bottom: 10;
 
   .modal {
-    // margin: 20;
     font-size: $font-size-default;
     margin-top: 35;
     border-radius: 4;
