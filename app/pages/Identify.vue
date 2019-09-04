@@ -128,13 +128,8 @@ export default {
     return {
       characterGroups: [
         {
-          key: "symptoms",
-          title: "Symptoms",
-          help: "What symptoms do you have?"
-        },
-        {
           key: "where",
-          title: "Where",
+          title: "Where?",
           help: "Where did the bite happen?"
         },
         {
@@ -146,6 +141,11 @@ export default {
           key: "what",
           title: "What?",
           help: "What did the species look like?"
+        },
+        {
+          key: "symptoms",
+          title: "Symptoms",
+          help: "What symptoms do you have?"
         }
       ],
       selectedCharacterGroup: 0,
