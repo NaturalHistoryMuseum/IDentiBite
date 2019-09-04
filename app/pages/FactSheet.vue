@@ -77,7 +77,6 @@
 
 
 <script>
-import ModalImage from "../components/ModalImage";
 import Warning from "../components/Warning";
 
 export default {
@@ -92,15 +91,11 @@ export default {
   },
   methods: {
     showModalImage(title, image) {
-      this.$showModal(ModalImage, {
+      this.$goto("modal", {
         props: {
           title: title,
           image: image
-        },
-        fullscreen: true,
-        animated: false,
-        stretched: false,
-        dimAmount: 0.5
+        }
       });
     }
   },
