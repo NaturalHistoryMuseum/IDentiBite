@@ -1,70 +1,70 @@
 ]<template>
   <Page class="page">
     <Header page-title="Identify" />
-    <GridLayout rows="*, 160">
-      <StackLayout row="0">
-        <SegmentedBar
-          v-model="selectedCharacterGroup"
-          class="segmented-bar"
-          width="100%"
-          height="30"
-        >
-          <SegmentedBarItem
-            v-for="group in characterGroups"
-            :title="group.title"
-            v-bind:key="group.key"
-            class="segmented-bar-item"
-          />
-        </SegmentedBar>
-        <SubHeader>
-          <Label :text="characterGroupHelp" />
-        </SubHeader>
+    <GridLayout rows="auto, auto, *, 160">
+      <SegmentedBar
+        v-model="selectedCharacterGroup"
+        class="segmented-bar"
+        width="100%"
+        height="30"
+        row="0"
+      >
+        <SegmentedBarItem
+          v-for="group in characterGroups"
+          :title="group.title"
+          v-bind:key="group.key"
+          class="segmented-bar-item"
+        />
+      </SegmentedBar>
+      <SubHeader row="1">
+        <Label :text="characterGroupHelp" />
+      </SubHeader>
 
-        <ListView
-          for="character in characterListByGroup"
-          ref="characterList"
-          class="character-list list-view"
-        >
-          <v-template>
-            <GridLayout
-              columns="*, 140"
-              :class="isReleventCharacter(character) ? 'active' : 'disabled'"
-              @tap="showModalForm(character)"
+      <ListView
+        for="character in characterListByGroup"
+        ref="characterList"
+        class="character-list list-view"
+        row="2"
+      >
+        <v-template>
+          <GridLayout
+            columns="*, 140"
+            :class="isReleventCharacter(character) ? 'active' : 'disabled'"
+            @tap="showModalForm(character)"
+            verticalAlignment="middle"
+            class="character-list-item list-view-item"
+          >
+            <Label
+              col="0"
+              :text="character.label"
+              textWrap="true"
+              class="character-label"
               verticalAlignment="middle"
-              class="character-list-item list-view-item"
+            />
+            <StackLayout
+              col="1"
+              class="character-state"
+              orientation="horizontal"
+              width="140"
+              height="30"
+              verticalAlignment="middle"
             >
               <Label
-                col="0"
-                :text="character.label"
-                textWrap="true"
-                class="character-label"
+                width="105"
+                :text="getCharacterSelectedStateValue(character)"
                 verticalAlignment="middle"
               />
-              <StackLayout
-                col="1"
-                class="character-state"
-                orientation="horizontal"
-                width="140"
-                height="30"
+              <Label
+                text.decode="&#xf078;"
+                class="fa page-icon"
                 verticalAlignment="middle"
-              >
-                <Label
-                  width="105"
-                  :text="getCharacterSelectedStateValue(character)"
-                  verticalAlignment="middle"
-                />
-                <Label
-                  text.decode="&#xf078;"
-                  class="fa page-icon"
-                  verticalAlignment="middle"
-                />
-              </StackLayout>
-            </GridLayout>
-          </v-template>
-        </ListView>
-      </StackLayout>
+              />
+            </StackLayout>
+          </GridLayout>
+        </v-template>
+      </ListView>
 
-      <StackLayout row="1" class="identify-results" verticalAlignment="bottom">
+      <StackLayout row="3" class="identify-results" verticalAlignment="bottom">
         <GridLayout
           columns="auto, 40, *, 80"
           height="24"

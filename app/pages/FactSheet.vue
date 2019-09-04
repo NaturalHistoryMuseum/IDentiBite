@@ -1,8 +1,8 @@
 <template>
   <Page class="page">
     <Header :page-title="species.common_name" />
-    <StackLayout>
-      <SubHeader>
+    <GridLayout rows="auto, *">
+      <SubHeader row="0">
         <GridLayout
           columns="auto, auto, auto, auto"
           height="30"
@@ -28,7 +28,7 @@
         </GridLayout>
       </SubHeader>
 
-      <ScrollView>
+      <ScrollView row="1">
         <StackLayout>
           <ScrollView orientation="horizontal">
             <StackLayout
@@ -71,7 +71,7 @@
           />
         </StackLayout>
       </ScrollView>
-    </StackLayout>
+    </GridLayout>
   </Page>
 </template>
 
