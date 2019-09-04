@@ -2,35 +2,55 @@
   <Page class="page" actionBarHidden="true">
     <Header page-title="Home" />
     <ScrollView>
-      <StackLayout width="100%">
-        <Button
-          class="fa page-icon page-icon-red pull-right"
-          @tap="onDrawerButtonTap()"
-          text.decode="&#xf0c9;"
-          width="30"
-        />
-        <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
-        <Image :src="'logo.png' | imageAssetPath" width="160" id="logo" />
+      <GridLayout rows="*, 100">
+        <StackLayout width="100%" row="0">
+          <Button
+            class="fa page-icon page-icon-red pull-right"
+            @tap="onDrawerButtonTap()"
+            text.decode="&#xf0c9;"
+            width="30"
+          />
 
-        <GridLayout
-          columns="auto, *"
-          @tap="$goto('identify')"
-          class="btn btn-primary"
+          <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
+          <Image :src="'logo.png' | imageAssetPath" width="160" id="logo" />
+
+          <GridLayout
+            columns="auto, *"
+            @tap="$goto('identify')"
+            class="btn btn-primary"
+          >
+            <Label col="0" text.decode="&#xf002;" class="fa"></Label>
+            <Label col="1" text="Identify" class="label"></Label>
+          </GridLayout>
+
+          <GridLayout columns="auto, *" @tap="$goto('explore')" class="btn">
+            <Label col="0" text.decode="&#xf188;" class="fa"></Label>
+            <Label col="1" text="Explore" class="label"></Label>
+          </GridLayout>
+
+          <GridLayout columns="auto, *" @tap="$goto('treatment')" class="btn">
+            <Label col="0" text.decode="&#xf21e;" class="fa"></Label>
+            <Label
+              col="1"
+              text="Treatment"
+              class="label"
+              textWrap="true"
+            ></Label>
+          </GridLayout>
+        </StackLayout>
+        <StackLayout
+          row="1"
+          horizontalAlignment="center"
+          verticalAlignment="bottom"
         >
-          <Label col="0" text.decode="&#xf002;" class="fa"></Label>
-          <Label col="1" text="Identify" class="label"></Label>
-        </GridLayout>
-
-        <GridLayout columns="auto, *" @tap="$goto('explore')" class="btn">
-          <Label col="0" text.decode="&#xf188;" class="fa"></Label>
-          <Label col="1" text="Explore" class="label"></Label>
-        </GridLayout>
-
-        <GridLayout columns="auto, *" @tap="$goto('treatment')" class="btn">
-          <Label col="0" text.decode="&#xf21e;" class="fa"></Label>
-          <Label col="1" text="Treatment" class="label" textWrap="true"></Label>
-        </GridLayout>
-      </StackLayout>
+          <Image
+            col="0"
+            :src="'nhm.png' | imageAssetPath"
+            id="nhm"
+            height="40"
+          />
+        </StackLayout>
+      </GridLayout>
     </ScrollView>
   </Page>
 </template>
@@ -63,11 +83,15 @@ export default {
 label.h1 {
   color: $red;
   margin-top: 20;
-  margin-bottom: 40;
+  margin-bottom: 30;
+}
+
+#nhm {
+  margin-bottom: $page-margin;
 }
 
 #logo {
-  margin-bottom: 50;
+  margin-bottom: 40;
 }
 
 .btn {
