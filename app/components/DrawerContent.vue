@@ -80,7 +80,9 @@
         >
           <Label text="Dr Alex Kew" id="dr" />
           <Label text="In association with" class="text-muted" />
-          <Image src="res://nhm" height="40" />
+          <Anchor href="https://www.nhm.ac.uk/">
+            <Image src="res://nhm" height="40" />
+          </Anchor>
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -90,12 +92,16 @@
 <script>
 import * as utils from "~/shared/utils";
 import SelectedPageService from "~/shared/selected-page-service";
+import Anchor from "../components/Anchor";
 
 export default {
   data() {
     return {
       selectedPage: ""
     };
+  },
+  components: {
+    Anchor
   },
   mounted() {
     SelectedPageService.getInstance().selectedPage$.subscribe(

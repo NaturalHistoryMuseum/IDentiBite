@@ -43,7 +43,9 @@
           horizontalAlignment="center"
           verticalAlignment="bottom"
         >
-          <Image col="0" src="res://nhm" id="nhm" height="40" />
+          <Anchor href="https://www.nhm.ac.uk/">
+            <Image col="0" src="res://nhm" id="nhm" height="40" />
+          </Anchor>
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -52,10 +54,14 @@
 
 <script>
 import * as utils from "~/shared/utils";
+import Anchor from "../components/Anchor";
 
 export default {
   mounted() {
     this.$updateSelectedPage("home");
+  },
+  components: {
+    Anchor
   },
   methods: {
     onDrawerButtonTap() {
