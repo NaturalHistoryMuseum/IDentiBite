@@ -10,7 +10,7 @@
           <Image
             col="0"
             :src="treatment['image']['file'] | imageAssetPath"
-            @tap="showModalImage(treatment.title, treatment.image)"
+            @tap="onImageTap"
             class="page-margins"
           />
           <Label
@@ -31,7 +31,6 @@
 
 
 <script>
-import ModalImage from "../components/ModalImage";
 import Warning from "../components/Warning";
 import TreatmentReferences from "../components/TreatmentReferences";
 
@@ -48,19 +47,23 @@ export default {
   },
   methods: {
     showModalImage(title, image) {
-      this.$showModal(ModalImage, {
+      this.$goto("modal", {
         props: {
           title: title,
           image: image
-        },
-        fullscreen: true,
-        animated: false,
-        stretched: false,
-        dimAmount: 0.5
+        }
       });
     },
     isTitle(text) {
       return text.split(" ").length == 1;
+    },
+    onImageTap() {
+      this.$goto("modal", {
+        props: {
+          title: this.treatment.title,
+          image: this.treatment.image
+        }
+      });
     }
   },
   mounted() {
