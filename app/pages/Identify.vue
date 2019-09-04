@@ -27,7 +27,7 @@
         >
           <v-template>
             <GridLayout
-              columns="*, 160"
+              columns="*, 140"
               :class="isReleventCharacter(character) ? 'active' : 'disabled'"
               @tap="showModalForm(character)"
               verticalAlignment="middle"
@@ -44,12 +44,12 @@
                 col="1"
                 class="character-state"
                 orientation="horizontal"
-                width="160"
+                width="140"
                 height="30"
                 verticalAlignment="middle"
               >
                 <Label
-                  width="125"
+                  width="105"
                   :text="getCharacterSelectedStateValue(character)"
                   verticalAlignment="middle"
                 />
@@ -211,7 +211,7 @@ export default {
     onSpeciesTap(item) {
       this.$goto("factSheet", {
         props: {
-          name: item.species.scientific_name
+          id: item.species.id
         }
       });
     },

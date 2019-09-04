@@ -80,13 +80,13 @@
 import Warning from "../components/Warning";
 
 export default {
-  props: ["name"],
+  props: ["id"],
   components: {
     Warning
   },
   computed: {
     species() {
-      return this.$store.getters.getSpeciesByScientificName(this.name);
+      return this.$store.getters.getSpeciesByID(this.id);
     }
   },
   methods: {

@@ -49,7 +49,7 @@ export default {
     onSpeciesTap(event) {
       this.$goto("factSheet", {
         props: {
-          name: event.item.scientific_name
+          id: event.item.id
         }
       });
     },
