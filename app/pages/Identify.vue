@@ -130,17 +130,17 @@ export default {
       characterGroups: [
         {
           key: "where",
-          title: "Where?",
+          title: "Where",
           help: "Where did the bite happen?"
         },
         {
           key: "when",
-          title: "When?",
+          title: "When",
           help: "What time of day / frequency?"
         },
         {
           key: "what",
-          title: "What?",
+          title: "What",
           help: "What did the species look like?"
         },
         {
