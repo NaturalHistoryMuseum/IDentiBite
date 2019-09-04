@@ -80,7 +80,7 @@
         >
           <Label text="Dr Alex Kew" id="dr" />
           <Label text="In association with" class="text-muted" />
-          <Image :src="'nhm.png' | imageAssetPath" width="100" height="47" />
+          <Image src="res://nhm" height="40" />
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -124,12 +124,13 @@ $sidedrawer-list-icon-size: 20;
     padding: 0;
     padding-top: 3;
     padding-bottom: 0;
-
-    margin-bottom: 0;
-    height: 46;
+    height: 47;
     label.h1 {
       font-size: $font-size-large;
       color: $white;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -142,12 +143,13 @@ $sidedrawer-list-icon-size: 20;
       label {
         horizontal-align: center;
         &#dr {
-          font-size: 16;
+          font-size: 14;
           text-transform: uppercase;
           margin-bottom: 3;
+          color: $dark-grey;
         }
         &.text-muted {
-          font-size: $font-size-small;
+          font-size: 10;
           margin-bottom: 6;
         }
       }
