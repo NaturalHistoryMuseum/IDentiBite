@@ -8,69 +8,76 @@
     </StackLayout>
 
     <ScrollView row="1" class="sidedrawer-content">
-      <StackLayout>
-        <GridLayout
-          columns="auto, *"
-          :class="
-            'sidedrawer-list-item' +
-              (selectedPage === 'home' ? ' selected' : '')
-          "
-          @tap="$goto('home')"
-        >
-          <Label col="0" text.decode="&#xf015;" class="fa"></Label>
-          <Label col="1" text="Home"></Label>
-        </GridLayout>
+      <GridLayout rows="*, auto" height="100%">
+        <StackLayout row="0">
+          <GridLayout
+            columns="auto, *"
+            :class="
+              'sidedrawer-list-item' +
+                (selectedPage === 'home' ? ' selected' : '')
+            "
+            @tap="$goto('home')"
+          >
+            <Label col="0" text.decode="&#xf015;" class="fa" />
+            <Label col="1" text="Home" />
+          </GridLayout>
 
-        <GridLayout
-          columns="auto, *"
-          :class="
-            'sidedrawer-list-item' +
-              (selectedPage === 'identify' ? ' selected' : '')
-          "
-          @tap="$goto('identify')"
-        >
-          <Label col="0" text.decode="&#xf002;" class="fa"></Label>
-          <Label col="1" text="Identify"></Label>
-        </GridLayout>
+          <GridLayout
+            columns="auto, *"
+            :class="
+              'sidedrawer-list-item' +
+                (selectedPage === 'identify' ? ' selected' : '')
+            "
+            @tap="$goto('identify')"
+          >
+            <Label col="0" text.decode="&#xf002;" class="fa" />
+            <Label col="1" text="Identify" />
+          </GridLayout>
 
-        <GridLayout
-          columns="auto, *"
-          :class="
-            'sidedrawer-list-item' +
-              (selectedPage === 'explore' ? ' selected' : '')
-          "
-          @tap="$goto('explore')"
-        >
-          <Label col="0" text.decode="&#xf188;" class="fa"></Label>
-          <Label col="1" text="Explore"></Label>
-        </GridLayout>
+          <GridLayout
+            columns="auto, *"
+            :class="
+              'sidedrawer-list-item' +
+                (selectedPage === 'explore' ? ' selected' : '')
+            "
+            @tap="$goto('explore')"
+          >
+            <Label col="0" text.decode="&#xf188;" class="fa" />
+            <Label col="1" text="Explore" />
+          </GridLayout>
 
-        <GridLayout
-          columns="auto, *"
-          :class="
-            'sidedrawer-list-item' +
-              (selectedPage === 'treatment' ? ' selected' : '')
-          "
-          @tap="$goto('treatment')"
-        >
-          <Label col="0" text.decode="&#xf21e;" class="fa"></Label>
-          <Label col="1" text="Treatment"></Label>
-        </GridLayout>
+          <GridLayout
+            columns="auto, *"
+            :class="
+              'sidedrawer-list-item' +
+                (selectedPage === 'treatment' ? ' selected' : '')
+            "
+            @tap="$goto('treatment')"
+          >
+            <Label col="0" text.decode="&#xf21e;" class="fa" />
+            <Label col="1" text="Treatment" />
+          </GridLayout>
 
-        <StackLayout class="hr-light"></StackLayout>
+          <StackLayout class="hr-light" />
 
-        <GridLayout
-          columns="auto, *"
-          :class="
-            'sidedrawer-list-item' +
-              (selectedPage === 'about' ? ' selected' : '')
-          "
-          @tap="$goto('about')"
-        >
-          <Label col="0" text.decode="&#xf05a;" class="fa"></Label>
-          <Label col="1" text="About"></Label>
-        </GridLayout>
-      </StackLayout>
+          <GridLayout
+            columns="auto, *"
+            :class="
+              'sidedrawer-list-item' +
+                (selectedPage === 'about' ? ' selected' : '')
+            "
+            @tap="$goto('about')"
+          >
+            <Label col="0" text.decode="&#xf05a;" class="fa" />
+            <Label col="1" text="About" />
+          </GridLayout>
+        </StackLayout>
+        <StackLayout row="1" horizontalAlignment="center">
+          <Label text="Dr Alex Kew" />
+          <Label text="In association with" class="text-muted" />
+          <Image :src="'nhm.png' | imageAssetPath" width="100" height="47" />
+        </StackLayout>
+      </GridLayout>
     </ScrollView>
   </StackLayout>
 </template>
