@@ -1,7 +1,7 @@
 ]<template>
   <Page class="page">
     <Header page-title="Identify" />
-    <GridLayout rows="auto, auto, *, 160">
+    <GridLayout rows="auto, auto, *, 180">
       <SegmentedBar
         v-model="selectedCharacterGroup"
         class="segmented-bar"
@@ -67,49 +67,56 @@
       <StackLayout row="3" class="identify-results" verticalAlignment="bottom">
         <GridLayout
           columns="auto, 40, *, 80"
-          height="24"
+          height="30"
           verticalAlignment="middle"
           class="m-t-5 m-b-5 page-side-margins"
         >
-          <Label col="0" text="Current possibilities:" />
+          <Label
+            col="0"
+            text="Current possibilities:"
+            verticalAlignment="middle"
+          />
           <Label
             col="1"
             class="current-possibilities-count"
             :text="currentPosibilitiesCount"
             textAlignment="center"
+            verticalAlignment="middle"
           />
           <Button
-            class="btn btn-dark-grey btn-small btn-rounded-sm"
+            class="btn-reset"
             col="3"
             width="80"
             text="Reset"
             @tap="onResetButtonTap"
+            verticalAlignment="middle"
+            textAlignment="center"
           />
         </GridLayout>
 
         <ScrollView orientation="horizontal">
-          <StackLayout orientation="horizontal" height="130">
+          <StackLayout orientation="horizontal" height="150">
             <GridLayout
               @tap="onSpeciesTap({ species })"
               v-for="species in speciesList"
               v-bind:key="species.id"
               :columns="speciesList.length"
-              width="130"
-              height="130"
+              width="140"
+              height="140"
               rows="*, 30"
               class="identify-results-item"
             >
               <Image
-                height="100"
-                width="130"
+                height="110"
+                width="140"
                 :src="species.images[0].file | imageAssetPath"
                 row="0"
                 stretch="aspectFill"
               />
               <Label
                 :text="species.common_name"
-                class="nameLabel"
                 row="1"
+                verticalAlignment="middle"
               ></Label>
             </GridLayout>
           </StackLayout>
@@ -322,12 +329,21 @@ export default {
   border-top-width: 1px;
   border-top-color: darken($light-grey, 10);
 
+  .current-possibilities-count,
+  .btn-reset {
+    padding: 2;
+    border-radius: 5;
+  }
+
   .current-possibilities-count {
     background-color: lighten($light-grey, 50);
-    border-radius: 5;
     margin-left: $page-margin;
-    padding: 2;
   }
+  .btn-reset {
+    background-color: lighten($dark-grey, 15%);
+    color: $white;
+  }
+
   .identify-results-item {
     margin-right: 2;
     background-color: $white;
