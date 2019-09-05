@@ -56,8 +56,6 @@ Vue.component('Header', Header);
 import SubHeader from "./components/SubHeader";
 Vue.component('SubHeader', SubHeader);
 
-Vue.prototype.$store = store
-
 new Vue({
     render(h) {
         return h(
@@ -67,5 +65,6 @@ new Vue({
                 h(Home, { slot: 'mainContent' })
             ]
         )
-    }
+    },
+    store: store
 }).$start();
