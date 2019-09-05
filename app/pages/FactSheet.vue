@@ -100,7 +100,7 @@ export default {
     }
   },
   mounted() {
-    this.$updateSelectedPage("explore");
+    // this.$updateSelectedPage("explore");
   }
 };
 </script>

@@ -173,7 +173,7 @@ import ListItem from "../components/ListItem";
 
 export default {
   mounted() {
-    this.$updateSelectedPage("about");
+    // this.$updateSelectedPage("about");
   }
 };
 </script>

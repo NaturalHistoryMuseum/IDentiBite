@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    this.$updateSelectedPage("treatment");
+    // this.$updateSelectedPage("treatment");
   }
 };
 </script>
