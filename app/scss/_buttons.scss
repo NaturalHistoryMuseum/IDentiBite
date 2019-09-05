@@ -8,10 +8,6 @@
         color: $white;
         background-color: $red;
     }
-    &.btn-dark-grey{
-        background-color: lighten($dark-grey, 10%);
-        color: $white;
-    }
     &.btn-grey{
         background-color: $light-grey;
         color: $primary;
@@ -19,14 +15,6 @@
     &.btn-transparent{
         background-color: transparent;
         color: $primary;
-    }
-    &.btn-small{
-        height: 50px;
-        font-size: $font-size-default;
-        padding: 0;
-    }
-    &.btn-rounded-sm{
-        border-radius: 5;
     }
     .fa{
       font-size: 24;

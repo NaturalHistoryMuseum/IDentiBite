@@ -1,5 +1,5 @@
 <template>
-  <GridLayout columns="120, *" class="list-item">
+  <GridLayout columns="120, *" class="list-item"> 
     <Image
       height="85"
       width="120"

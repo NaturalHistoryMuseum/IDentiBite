@@ -1,8 +1,8 @@
 <template>
   <Page class="page">
     <Header page-title="Explore" />
-    <StackLayout>
-      <SubHeader />
+    <GridLayout rows="auto, *">
+      <SubHeader row="0" />
       <RadListView
         ref="exploreListView"
         :items="speciesList"
@@ -11,6 +11,7 @@
         :sortingFunction="sortSpecies"
         enableCollapsibleGroups="true"
         class="list-view"
+        row="1"
       >
         <v-template name="group">
           <Label
@@ -28,7 +29,7 @@
           />
         </v-template>
       </RadListView>
-    </StackLayout>
+    </GridLayout>
   </Page>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
-  <StackLayout rows="auto, *" class="sidedrawer sidedrawer-left">
+  <GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
     <StackLayout
       id="sidedrawer-header"
       class="sidedrawer-header vertical-align"
+      row="0"
     >
       <Label text="IDentiBite" class="h1" />
     </StackLayout>
@@ -86,7 +87,7 @@
         </StackLayout>
       </GridLayout>
     </ScrollView>
-  </StackLayout>
+  </GridLayout>
 </template>
 
 <script>
