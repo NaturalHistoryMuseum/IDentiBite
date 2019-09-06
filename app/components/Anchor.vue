@@ -10,7 +10,6 @@ export default {
   props: ["href"],
   methods: {
     onAnchorTap() {
-      console.log("OPEN");
       utilityModule.openUrl(this.href);
     }
   }
