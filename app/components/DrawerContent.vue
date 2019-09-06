@@ -86,13 +86,18 @@ import SelectedPageService from "~/shared/selected-page-service";
 import Anchor from "../components/Anchor";
 
 export default {
-  computed: {
-    selectedPage() {
-      return this.$store.getters.getSelectedPage;
-    }
+  data() {
+    return {
+      selectedPage: ""
+    };
   },
   components: {
     Anchor
+  },
+  mounted() {
+    SelectedPageService.getInstance().selectedPage$.subscribe(
+      selectedPage => (this.selectedPage = selectedPage)
+    );
   }
 };
 </script>

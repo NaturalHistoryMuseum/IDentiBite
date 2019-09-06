@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 import * as utils from "~/shared/utils";
-// import SelectedPageService from "~/shared/selected-page-service";
+import SelectedPageService from "~/shared/selected-page-service";
 
 Vue.use(RadSideDrawer);
 
@@ -30,8 +30,6 @@ Vue.prototype.$router = router
 
 Vue.prototype.$goto = function (pageName, options = {}) {
 
-    this.$updateSelectedPage('');
-
     if (pageName == 'home') {
         options['clearHistory'] = true
     } else if (pageName == 'modal') {
@@ -48,8 +46,9 @@ Vue.prototype.$goto = function (pageName, options = {}) {
 }
 
 Vue.prototype.$updateSelectedPage = function (pageName) {
-    this.$store.commit('updateSelectedPage', pageName);
+    SelectedPageService.getInstance().updateSelectedPage(pageName);
 }
+
 
 // Register the header component globally
 import Header from "./components/Header";
