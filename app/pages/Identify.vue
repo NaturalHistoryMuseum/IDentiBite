@@ -212,7 +212,7 @@ export default {
     }
   },
   mounted() {
-    // this.$updateSelectedPage("identify");
+    this.$updateSelectedPage("identify");
   },
   methods: {
     onSpeciesTap(item) {

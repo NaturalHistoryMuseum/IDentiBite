@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 import * as utils from "~/shared/utils";
-import SelectedPageService from "~/shared/selected-page-service";
+// import SelectedPageService from "~/shared/selected-page-service";
 
 Vue.use(RadSideDrawer);
 
@@ -27,11 +27,14 @@ import './filters.js';
 import router from './router'
 
 Vue.prototype.$router = router
-Vue.prototype.$goto = function (to, options = {}) {
 
-    if (to == 'home') {
+Vue.prototype.$goto = function (pageName, options = {}) {
+
+    this.$updateSelectedPage('');
+
+    if (pageName == 'home') {
         options['clearHistory'] = true
-    } else if (to == 'modal') {
+    } else if (pageName == 'modal') {
         // Fake it like a modal
         options['transition'] = {
             name: "fade",
@@ -40,12 +43,12 @@ Vue.prototype.$goto = function (to, options = {}) {
         }
     }
 
-    this.$navigateTo(this.$router[to], options);
+    this.$navigateTo(this.$router[pageName], options);
     utils.closeDrawer();
 }
 
 Vue.prototype.$updateSelectedPage = function (pageName) {
-    SelectedPageService.getInstance().updateSelectedPage(pageName);
+    this.$store.commit('updateSelectedPage', pageName);
 }
 
 // Register the header component globally
@@ -56,7 +59,7 @@ Vue.component('Header', Header);
 import SubHeader from "./components/SubHeader";
 Vue.component('SubHeader', SubHeader);
 
-Vue.prototype.$store = store
+// Vue.prototype.$store = store
 
 new Vue({
     render(h) {

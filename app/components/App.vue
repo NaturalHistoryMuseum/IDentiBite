@@ -10,16 +10,13 @@
 </template>
 
 <script>
-    import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
-    
-    export default {
-        data () {
-          return {
-            transition: new SlideInOnTopTransition()
-          }
-        }
-  }
-</script>
+import { SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 
-<style lang="css">
-</style>
+export default {
+  data() {
+    return {
+      transition: new SlideInOnTopTransition()
+    };
+  }
+};
+</script>

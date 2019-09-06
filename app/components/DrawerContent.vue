@@ -13,10 +13,8 @@
         <StackLayout row="0">
           <GridLayout
             columns="auto, *"
-            :class="
-              'sidedrawer-list-item' +
-                (selectedPage === 'home' ? ' selected' : '')
-            "
+            class="sidedrawer-list-item"
+            :class="selectedPage === 'home' ? ' selected' : ''"
             @tap="$goto('home')"
           >
             <Label col="0" text.decode="&#xf015;" class="fa" />
@@ -25,10 +23,8 @@
 
           <GridLayout
             columns="auto, *"
-            :class="
-              'sidedrawer-list-item' +
-                (selectedPage === 'identify' ? ' selected' : '')
-            "
+            class="sidedrawer-list-item"
+            :class="selectedPage === 'identify' ? ' selected' : ''"
             @tap="$goto('identify')"
           >
             <Label col="0" text.decode="&#xf002;" class="fa" />
@@ -37,10 +33,8 @@
 
           <GridLayout
             columns="auto, *"
-            :class="
-              'sidedrawer-list-item' +
-                (selectedPage === 'explore' ? ' selected' : '')
-            "
+            class="sidedrawer-list-item"
+            :class="selectedPage === 'explore' ? ' selected' : ''"
             @tap="$goto('explore')"
           >
             <Label col="0" text.decode="&#xf188;" class="fa" />
@@ -49,10 +43,8 @@
 
           <GridLayout
             columns="auto, *"
-            :class="
-              'sidedrawer-list-item' +
-                (selectedPage === 'treatment' ? ' selected' : '')
-            "
+            class="sidedrawer-list-item"
+            :class="selectedPage === 'treatment' ? ' selected' : ''"
             @tap="$goto('treatment')"
           >
             <Label col="0" text.decode="&#xf21e;" class="fa" />
@@ -63,10 +55,8 @@
 
           <GridLayout
             columns="auto, *"
-            :class="
-              'sidedrawer-list-item' +
-                (selectedPage === 'about' ? ' selected' : '')
-            "
+            class="sidedrawer-list-item"
+            :class="selectedPage === 'about' ? ' selected' : ''"
             @tap="$goto('about')"
           >
             <Label col="0" text.decode="&#xf05a;" class="fa" />
@@ -96,18 +86,13 @@ import SelectedPageService from "~/shared/selected-page-service";
 import Anchor from "../components/Anchor";
 
 export default {
-  data() {
-    return {
-      selectedPage: ""
-    };
+  computed: {
+    selectedPage() {
+      return this.$store.state.selectedPage;
+    }
   },
   components: {
     Anchor
-  },
-  mounted() {
-    SelectedPageService.getInstance().selectedPage$.subscribe(
-      selectedPage => (this.selectedPage = selectedPage)
-    );
   }
 };
 </script>
