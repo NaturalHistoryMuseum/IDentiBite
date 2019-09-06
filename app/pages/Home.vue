@@ -54,14 +54,10 @@
 
 <script>
 import * as utils from "~/shared/utils";
-import Anchor from "../components/Anchor";
 
 export default {
   mounted() {
     this.$updateSelectedPage("home");
-  },
-  components: {
-    Anchor
   },
   methods: {
     onDrawerButtonTap() {

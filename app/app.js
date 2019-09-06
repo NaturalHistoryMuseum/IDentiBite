@@ -58,6 +58,9 @@ Vue.component('Header', Header);
 import SubHeader from "./components/SubHeader";
 Vue.component('SubHeader', SubHeader);
 
+import Anchor from "./components/Anchor";
+Vue.component('Anchor', Anchor);
+
 new Vue({
     render(h) {
         return h(
