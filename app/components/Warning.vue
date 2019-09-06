@@ -1,7 +1,12 @@
 <template>
   <StackLayout orientation="horizontal" class="m-t-15 m-b-15 body">
     <Label class="fa" text.decode="&#xf06a;" width="35" />
-    <Label :text="text" textWrap="true" />
+    <Label
+      class="warning-text"
+      :text="text"
+      textWrap="true"
+      verticalAlignment="top"
+    />
   </StackLayout>
 </template>
 
@@ -19,5 +24,9 @@ label {
 }
 label.fa {
   font-size: 30;
+}
+
+label.warning-text {
+  padding-top: 5;
 }
 </style>
