@@ -29,3 +29,4 @@ Print object to console:
 
 console.dir(args);
 
+https://dzone.com/articles/handling-changes-in-orientation-in-your-nativescri

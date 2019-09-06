@@ -27,11 +27,12 @@ import './filters.js';
 import router from './router'
 
 Vue.prototype.$router = router
-Vue.prototype.$goto = function (to, options = {}) {
 
-    if (to == 'home') {
+Vue.prototype.$goto = function (pageName, options = {}) {
+
+    if (pageName == 'home') {
         options['clearHistory'] = true
-    } else if (to == 'modal') {
+    } else if (pageName == 'modal') {
         // Fake it like a modal
         options['transition'] = {
             name: "fade",
@@ -40,13 +41,14 @@ Vue.prototype.$goto = function (to, options = {}) {
         }
     }
 
-    this.$navigateTo(this.$router[to], options);
+    this.$navigateTo(this.$router[pageName], options);
     utils.closeDrawer();
 }
 
 Vue.prototype.$updateSelectedPage = function (pageName) {
     SelectedPageService.getInstance().updateSelectedPage(pageName);
 }
+
 
 // Register the header component globally
 import Header from "./components/Header";
@@ -56,7 +58,8 @@ Vue.component('Header', Header);
 import SubHeader from "./components/SubHeader";
 Vue.component('SubHeader', SubHeader);
 
-Vue.prototype.$store = store
+import Anchor from "./components/Anchor";
+Vue.component('Anchor', Anchor);
 
 new Vue({
     render(h) {
