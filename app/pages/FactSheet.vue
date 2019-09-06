@@ -53,6 +53,12 @@
             class="body"
           />
           <Label text="Bites and stings" class="h2" />
+          <Label class="body" textWrap="true">
+            <FormattedString>
+              <Span text="Category: " fontWeight="Bold" />
+              <Span :text="species.category" />
+            </FormattedString>
+          </Label>
           <Warning :text="species.warning" />
           <Label
             :text="bites"
