@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "nativescript-vue";
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -121,11 +121,14 @@ export default new Vuex.Store({
             { "id": 5, "short_title": "Getting help", "title": "When should you call for help?", "image": { "file": "when-should-you-call-for-help-2.jpg", "credit": "CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=1517111" }, "text": ["You should always contact a medical professional or speak to the NHS 111 service if you are ever concerned about a bite, sting or problems occurring after being bitten or stung", "You should also see a medical professional if:", "You develop a skin infection. Symptoms of this may include worsening swelling, redness, pain, heat from the skin and pus from the bite/sting", "You become generally unwell. Symptoms of this may include fever, headache, diarrhea and vomiting, swollen lymph nodes and flu like symptoms", "You notice the skin lesion is worsening rather than improving after a few days", "Soft parts of your body have been affected like your eyes or throat", "A large area around the bite/sting or other parts of your body becomes affected. This can indicate an allergy or infection and so should be reviewed by a medical professional"], "warning": "If you become severely unwell see the emergency treatment page", "photos_by": ["CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=1517111"] },
             { "id": 6, "short_title": "Emergency", "title": "Getting emergency treatment", "image": { "file": "emergency-2.jpg", "credit": "By hha124l (Chris Sampson) - https://www.flickr.com/photos/lodekka/4771842492/, CC BY 2.0," }, "text": ["Dial 999 immediately if you suffer a severe reaction or symptoms. These can include but are not limited to:", "Collapse, dizziness and feeling like you\u2019re about to collapse", "Breathing difficulties including wheezing and shortness of breath", "Face, lips, mouth, tongue and throat start to swell or become swollen", "The person bitten/stung becomes unconscious", "Severe chest pain and fast heart rate", "The person bitten/stung becomes confused or starts acting in an unusual way", "You feel severely unwell"], "warning": "If you become severely unwell or there is an emergency please call 999 immediately", "photos_by": ["By hha124l (Chris Sampson) - https://www.flickr.com/photos/lodekka/4771842492/, CC BY 2.0,"] },
 
-        ]
+        ],
+        selectedPage: ''
 
     },
     mutations: {
-
+        updateSelectedPage(state, pageName) {
+            state.selectedPage = pageName
+        }
     },
     actions: {
 
@@ -147,6 +150,9 @@ export default new Vuex.Store({
         },
         getTreatmentByID: (state) => (id) => {
             return state.treatments.find(treatment => treatment.id === id)
+        },
+        getSelectedPage: (state) => {
+            return state.selectedPage
         },
 
     }
