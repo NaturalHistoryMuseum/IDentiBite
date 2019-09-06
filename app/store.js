@@ -122,7 +122,7 @@ export default new Vuex.Store({
             { "id": 6, "short_title": "Emergency", "title": "Getting emergency treatment", "image": { "file": "emergency-2.jpg", "credit": "By hha124l (Chris Sampson) - https://www.flickr.com/photos/lodekka/4771842492/, CC BY 2.0," }, "text": ["Dial 999 immediately if you suffer a severe reaction or symptoms. These can include but are not limited to:", "Collapse, dizziness and feeling like you\u2019re about to collapse", "Breathing difficulties including wheezing and shortness of breath", "Face, lips, mouth, tongue and throat start to swell or become swollen", "The person bitten/stung becomes unconscious", "Severe chest pain and fast heart rate", "The person bitten/stung becomes confused or starts acting in an unusual way", "You feel severely unwell"], "warning": "If you become severely unwell or there is an emergency please call 999 immediately", "photos_by": ["By hha124l (Chris Sampson) - https://www.flickr.com/photos/lodekka/4771842492/, CC BY 2.0,"] },
 
         ],
-        selectedPage: ''
+        selectedPage: 'home'
 
     },
     mutations: {

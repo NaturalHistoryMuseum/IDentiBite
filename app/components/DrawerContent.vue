@@ -88,7 +88,7 @@ import Anchor from "../components/Anchor";
 export default {
   computed: {
     selectedPage() {
-      return this.$store.state.selectedPage;
+      return this.$store.getters.getSelectedPage;
     }
   },
   components: {
