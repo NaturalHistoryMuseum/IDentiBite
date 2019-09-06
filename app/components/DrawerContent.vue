@@ -83,6 +83,7 @@
 <script>
 import * as utils from "~/shared/utils";
 import SelectedPageService from "~/shared/selected-page-service";
+import { isIOS } from "tns-core-modules/platform";
 
 export default {
   data() {
@@ -91,9 +92,14 @@ export default {
     };
   },
   mounted() {
-    SelectedPageService.getInstance().selectedPage$.subscribe(
-      selectedPage => (this.selectedPage = selectedPage)
-    );
+    // Not sure why, but this causes an error in Android
+    // Attempt to use cleared object reference
+    // So no highlighted menu items for android users
+    if (isIOS) {
+      SelectedPageService.getInstance().selectedPage$.subscribe(
+        selectedPage => (this.selectedPage = selectedPage)
+      );
+    }
   }
 };
 </script>
