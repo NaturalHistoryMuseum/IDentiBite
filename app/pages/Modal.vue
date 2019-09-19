@@ -25,7 +25,7 @@ export default {
   props: ["title", "image"],
   methods: {
     onCloseTap() {
-      // Thanks to andriod modal image roation, we're not really a modal - just go back
+      // Thanks to andriod modal image rotation, we're not really a modal - just go back
       frameModule.topmost().goBack();
     }
   }
