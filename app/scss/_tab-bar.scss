@@ -1,0 +1,23 @@
+
+.tab-bar{
+  border-color: $dark-red;
+  border-radius: 0;
+  padding: 0;
+  color: $dark-red;
+  margin: 0;
+  background-color: $white;
+  height: 30;
+  vertical-align: middle;
+  .tab-bar-item{
+      padding-top: 5;
+      margin: 0;
+      height: 30;
+      vertical-align: middle;
+      text-align: center;
+      &.tab-bar-item-active{
+          background-color: $dark-red;
+          color: $white;
+      }
+  }
+}
+
