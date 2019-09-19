@@ -63,18 +63,27 @@
             <Label col="1" text="About" />
           </GridLayout>
         </StackLayout>
-        <StackLayout
-          row="1"
-          horizontalAlignment="center"
-          id="credit"
-          width="100%"
-        >
-          <Label text="Dr Alex Kew" id="dr" />
-          <Label text="In association with" class="text-muted" />
-          <Anchor href="https://www.nhm.ac.uk/">
-            <Image src="res://nhm" height="40" />
-          </Anchor>
-        </StackLayout>
+        <GridLayout columns="*, auto" row="1" class="sidedrawer-footer">
+          <StackLayout
+            col="0"
+            horizontalAlignment="left"
+            id="credit"
+            width="100%"
+            verticalAlignment="bottom"
+          >
+            <Label text="Dr Alex Kew" />
+            <Label text="In association with" class="text-muted" />
+          </StackLayout>
+          <StackLayout
+            col="1"
+            horizontalAlignment="right"
+            verticalAlignment="bottom"
+          >
+            <Anchor href="https://www.nhm.ac.uk/" class="pull-right">
+              <Image src="res://nhm" height="40" />
+            </Anchor>
+          </StackLayout>
+        </GridLayout>
       </GridLayout>
     </ScrollView>
   </GridLayout>
@@ -136,20 +145,25 @@ $sidedrawer-list-icon-size: 20;
   .sidedrawer-content {
     background-color: $side-drawer-background;
 
-    #credit {
+    .sidedrawer-footer {
       background-color: $light-grey;
-      padding: $page-margin 0;
-      label {
-        horizontal-align: center;
-        &#dr {
+      padding: $page-margin;
+
+      StackLayout {
+        vertical-align: bottom;
+
+        label {
+          text-align: left;
           font-size: 14;
           text-transform: uppercase;
           margin-bottom: 3;
           color: $dark-grey;
-        }
-        &.text-muted {
-          font-size: 10;
-          margin-bottom: 6;
+
+          &.text-muted {
+            font-size: 10;
+            margin-bottom: 0;
+            text-transform: none;
+          }
         }
       }
     }
