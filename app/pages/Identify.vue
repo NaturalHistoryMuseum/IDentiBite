@@ -2,20 +2,20 @@
   <Page class="page">
     <Header page-title="Identify" />
     <GridLayout rows="auto, auto, *, 180">
-      <SegmentedBar
-        v-model="selectedCharacterGroup"
-        class="segmented-bar"
-        width="100%"
-        height="30"
-        row="0"
-      >
-        <SegmentedBarItem
-          v-for="group in characterGroups"
-          :title="group.title"
+      <StackLayout orientation="horizontal" class="tab-bar vertical-align">
+        <Label
+          v-for="(group, index) in characterGroups"
           v-bind:key="group.key"
-          class="segmented-bar-item"
+          :text="group.title"
+          width="25%"
+          class="tab-bar-item vertical-align"
+          :class="{
+            'tab-bar-item-active': index === selectedCharacterGroup
+          }"
+          @tap="selectedCharacterGroup = index"
         />
-      </SegmentedBar>
+      </StackLayout>
+
       <SubHeader row="1">
         <Label :text="characterGroupHelp" />
       </SubHeader>
@@ -136,6 +136,11 @@ export default {
     return {
       characterGroups: [
         {
+          key: "what",
+          title: "What",
+          help: "What did the species look like?"
+        },
+        {
           key: "where",
           title: "Where",
           help: "Where did the bite happen?"
@@ -144,11 +149,6 @@ export default {
           key: "when",
           title: "When",
           help: "What time of day / frequency?"
-        },
-        {
-          key: "what",
-          title: "What",
-          help: "What did the species look like?"
         },
         {
           key: "symptoms",
@@ -188,9 +188,10 @@ export default {
       let previousCharacterStates = {};
       this.speciesList.forEach(
         function(species) {
-          for (const [id, states] of Object.entries(species.character_states)) {
+          for (let [id, states] of Object.entries(species.character_states)) {
             let characterID = Number(id);
             // Sort states and stringify to allow comparison with previous states
+
             let statesStr = states.sort().toString();
 
             // If we already know this is a relevant character, skip it
