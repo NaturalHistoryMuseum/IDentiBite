@@ -4,12 +4,16 @@
     <ScrollView>
       <GridLayout rows="*, 80">
         <StackLayout width="100%" row="0">
-          <Button
-            class="fa page-icon page-icon-red pull-right"
-            @tap="onDrawerButtonTap()"
-            text.decode="&#xf0c9;"
-            width="30"
-          />
+          <GridLayout columns="auto, *">
+            <Label text="beta" id="beta" />
+            <Button
+              class="fa page-icon page-icon-red pull-right"
+              @tap="onDrawerButtonTap()"
+              text.decode="&#xf0c9;"
+              width="30"
+              col="1"
+            />
+          </GridLayout>
 
           <Label class="h1" text="IDentiBite" textAlignment="center"></Label>
           <Image src="res://logo" width="160" height="160" id="logo" />
@@ -83,8 +87,13 @@ label.h1 {
   margin-bottom: 30;
 }
 
-#nhm {
-  //   margin-bottom: $page-margin;
+#beta {
+  background: $medium-grey;
+  color: $white;
+  padding: 1 10;
+  text-align: center;
+  margin-left: $page-margin;
+  text-transform: uppercase;
 }
 
 #logo {
