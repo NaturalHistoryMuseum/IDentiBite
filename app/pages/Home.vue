@@ -94,6 +94,8 @@ label.h1 {
   text-align: center;
   margin-left: $page-margin;
   text-transform: uppercase;
+  height: 22;
+  vertical-align: middle;
 }
 
 #logo {
