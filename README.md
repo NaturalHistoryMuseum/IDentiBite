@@ -59,7 +59,7 @@ tns platform add ios@6.5.2
 
 If get the error "error: Building for iOS, but the linked and embedded framework 'TNSListView.framework' was built for iOS + iOS Simulator."
 
-Open IDentiBite.xcodeproj and change Build settings > Validate workspace -> No
+Open IDentiBite.xcworkspace and change Build settings > Validate workspace -> No
 
 Rerun: ```tns build ios --release --for-device```
 
