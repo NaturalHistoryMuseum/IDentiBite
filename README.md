@@ -6,40 +6,50 @@
 
 Follow install instructions at: https://docs.nativescript.org/environment-setup.html#macos-ios
 
+Working version of nativescript: nativescript@6.5.1
 
- npm install --include=dev
+```
+npm install -g nativescript@6.5.1
+```
 
+Node version: v12.0.0
 
-``` tns debug ios --bundle ```
+With NVM:
 
+``` bash
+nvm install 12.0.0
+nvm use 12.0.0
+```
 
-nativescript@6.0.2
+## Developing
 
+### Running & building
 
-To get it working on the simulator: https://developer.apple.com/forums/thread/657913
+``` bash
 
-In xcode add arm64 to excluded architecture
+# Install dependencies
+npm install
 
+# Build for production
+tns build <platform> --bundle
 
-To debug -  00008030-001A24302E23802E
+# Build, watch for changes and debug the application
+tns debug <platform> --bundle
 
-# Get rid of platforms/*
-tns clean - for 6.5 +??
+# Build, watch for changes and run the application
+tns run <platform> --bundle
+```
 
-https://stackoverflow.com/questions/59856596/failed-to-tns-build-ios-due-as-mdfinternationalization-and-materialcomponents-di
+### Rebuilding
 
+It's often useful to completely rebuild the platform:
 
+```
+tns platform remove ios
+tns platform add ios@6.5.2
+````
 
-## Set up
-
-Add platform:
-
-```tns platform add ios@6.5.2```
-
-
-
-
-## To test on iPhone
+## Testing (on iPhone)
 
 ### Via Xcode
 
@@ -62,7 +72,7 @@ Go into Xcode and click play button.
 If building new, need to change Validate workspace setting as above.
 
 
-#### Potential errors
+## Potential errors
 
 ```MDFInternationalization not found``` Or other missing Pods
 
@@ -73,35 +83,19 @@ Switch to .xcworkspace and rerun.
 
 
 
-## TODO:
+## Releases
 
-Roll back changes - and see if just install works???
+#### 1.0 / 1.1 - Initial release
 
-If not, keep trying to fix
+#### 1.2 - Bug fix for app crashing - tkdatasource conflict.
 
-## To test on an iPhone
+Upgraded ui-listview (and other packages to resolve list-view conflicts) - https://github.com/NaturalHistoryMuseum/IDentiBite/commit/5a7e595b3136332060af284d3f9ec5515d689443#diff-7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519
 
-Add device at: https://developer.apple.com/account/resources/devices/add
+https://github.com/ProgressNS/nativescript-ui-feedback/issues/1374
 
-Create a new profile: https://developer.apple.com/account/resources/certificates/add/
 
-## Usage
+### Notes
 
-``` bash
-# Install dependencies
-npm install
-
-# Build for production
-tns build <platform> --bundle
-
-# Build, watch for changes and debug the application
-tns debug <platform> --bundle
-
-# Build, watch for changes and run the application
-tns run <platform> --bundle
-```
-
-tns run android --timeout 500
 
 https://dzone.com/articles/structuring-your-pages-sidedrawers-and-tabviews-wi
 
